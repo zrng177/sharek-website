@@ -73,11 +73,14 @@ class Database {
         // method — e.g. a typo'd key, or a partially-filled .env.example
         // copied as-is, would only surface as a confusing PDO connection
         // error downstream.
-        $requiredKeys = ['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS'];
+        $requiredKeys = ['DB_HOST', 'DB_NAME', 'DB_USER'];
         foreach ($requiredKeys as $requiredKey) {
             if (!isset($env[$requiredKey]) || $env[$requiredKey] === '') {
                 throw new RuntimeException('Configuration unavailable');
             }
+        }
+        if (!isset($env['DB_PASS'])) {
+            $env['DB_PASS'] = '';
         }
 
         $this->host = $env['DB_HOST'];
