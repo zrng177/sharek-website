@@ -1,0 +1,501 @@
+/*
+    Sharek v1.5 - Authentication Styles
+    
+    @file auth.css
+    @date 2026-05-25
+    @description Authentication styles: register, login, OTP boxes, step indicators, verify
+    @version 1.5.0
+*/
+
+/* Page Enter Animation */
+body {
+    animation: pageEnter 0.3s ease;
+}
+
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   Auth Header
+   ========================================================================== */
+.auth-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+}
+
+.auth-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-link {
+    font-family: 'Vazirmatn';
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: var(--navy);
+    text-decoration: none;
+}
+
+.back-link {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: var(--blue);
+}
+
+/* ==========================================================================
+   Auth Tabs
+   ========================================================================== */
+.auth-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: var(--space-lg);
+    background: var(--bg-card-alt);
+    border-radius: var(--r-sm);
+    padding: 0.25rem;
+}
+
+.auth-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    transition: var(--ease);
+    min-height: 44px;
+}
+
+.auth-tab:hover {
+    color: var(--text-secondary);
+}
+
+.auth-tab.active {
+    background: var(--navy);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.auth-form { display: none; }
+.auth-form.active { display: block; }
+
+.auth-form .btn {
+    width: 100%;
+    margin-top: var(--space-md);
+    font-size: 1rem;
+}
+
+.auth-form .form-group,
+#booking-form .form-group {
+    margin-bottom: 0.85rem;
+    text-align: right;
+}
+
+#booking-form .form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+/* ==========================================================================
+   Booking Modal Extras
+   ========================================================================== */
+.booking-seats-hint {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 0.6rem;
+    text-align: right;
+    font-weight: 600;
+}
+
+.form-error {
+    color: var(--danger);
+    font-size: 0.88rem;
+    margin-bottom: 0.6rem;
+    padding: 0.55rem 0.85rem;
+    background: var(--danger-bg);
+    border-radius: var(--r-sm);
+    text-align: right;
+    font-weight: 600;
+    border-right: 3px solid var(--danger);
+}
+
+.booking-contact {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+    text-align: right;
+}
+
+.booking-contact h3 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+}
+
+.booking-contact-name,
+.booking-contact-phone {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.booking-contact-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.85rem;
+}
+
+.booking-contact-actions .call-btn,
+.booking-contact-actions .wa-btn {
+    flex: 1;
+    min-width: 130px;
+}
+
+/* ==========================================================================
+   Password Wrapper for Show/Hide Functionality
+   ========================================================================== */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-left: 3rem;
+}
+
+.toggle-password {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    padding: 0;
+}
+
+.toggle-password:hover {
+    color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Admin Panel Login Styles
+   ========================================================================== */
+.admin-body {
+    background: var(--bg-page);
+    min-height: 100vh;
+    font-family: 'Vazirmatn', sans-serif;
+    direction: rtl;
+}
+
+.admin-login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+}
+
+.admin-login-form {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.admin-login-form h1 {
+    margin: 0 0 0.5rem 0;
+    color: var(--navy);
+    font-size: 1.75rem;
+}
+
+.admin-login-form p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.admin-login-form .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.admin-login-form label {
+    display: block;
+    text-align: right;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.admin-login-form input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.admin-login-form input[type="password"]:focus {
+    outline: none;
+    border-color: var(--navy-light);
+}
+
+.admin-error {
+    color: var(--danger);
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--danger-bg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--danger);
+}
+
+.admin-hint {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.admin-hint a {
+    color: var(--navy-light);
+    text-decoration: none;
+}
+
+.admin-hint a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Dark Mode Overrides — auth.css
+   ========================================================================== */
+body.dark-mode .auth-card,
+body.dark-mode .register-card,
+body.dark-mode .login-card,
+body.dark-mode .verify-card {
+    background: var(--bg-card);
+    border-color: var(--border);
+}
+
+body.dark-mode .auth-header {
+    background: var(--bg-card);
+    border-bottom-color: var(--border);
+}
+
+body.dark-mode .otp-box {
+    background: var(--bg-card-alt);
+    border-color: var(--border);
+}
+
+body.dark-mode .otp-digit-input,
+body.dark-mode .otp-code {
+    background: var(--bg-input);
+    color: var(--text-primary);
+    border-color: var(--border);
+}
+
+body.dark-mode .step {
+    background: var(--bg-card-alt);
+    color: var(--text-muted);
+    border-color: var(--border);
+}
+
+body.dark-mode .step.active {
+    background: var(--navy);
+    color: var(--text-white);
+}
+
+body.dark-mode .step.done {
+    background: var(--success);
+    color: var(--text-white);
+}
+
+body.dark-mode .step-line {
+    background: var(--border);
+}
+
+body.dark-mode .step-line.active {
+    background: var(--navy);
+}
+
+body.dark-mode .email-badge {
+    background: var(--bg-card-alt);
+    color: var(--text-primary);
+    border-color: var(--border);
+}
+
+body.dark-mode .form-error,
+body.dark-mode .error-message {
+    border-color: var(--danger);
+    background: var(--danger-bg);
+    color: var(--danger);
+}
+
+/* Fix the single hardcoded color in auth.css (line 276) */
+body.dark-mode .input-error,
+body.dark-mode input.error {
+    border-color: var(--danger) !important;
+}
+
+body.dark-mode .spam-hint {
+    background: var(--warning-bg);
+    border-right-color: var(--amber);
+    color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Mobile Responsive
+   ========================================================================== */
+@media (max-width: 768px) {
+    .auth-container,
+    .login-container,
+    .register-container {
+        padding: 1rem;
+    }
+    
+    .auth-card,
+    .login-card,
+    .register-card {
+        padding: 1.25rem;
+        max-width: 100%;
+    }
+    
+    .auth-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .login-card .form-group input,
+    .register-card .form-group input,
+    .login-card .form-group select,
+    .register-card .form-group select {
+        font-size: 16px !important; /* Prevent iOS zoom */
+        padding: 0.875rem 1rem;
+    }
+
+    .login-card input,
+    .register-card input {
+        font-size: 16px !important;
+        padding: 0.875rem 1rem;
+    }
+
+    .btn-submit,
+    .login-card .btn-submit,
+    .register-card .btn-submit {
+        min-height: 48px;
+        font-size: 1rem;
+    }
+    
+    /* Touch-friendly */
+    .toggle-password,
+    .password-wrapper .toggle-password,
+    .password-wrap .toggle-password {
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 1.2rem;
+    }
+
+    /* login.php and register.php mobile fix */
+    .login-container,
+    .register-container {
+        padding: 0.75rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
+    .login-card,
+    .register-card {
+        padding: 1.5rem;
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .login-card input,
+    .login-card select,
+    .register-card input,
+    .register-card select {
+        font-size: 16px !important;
+        padding: 0.875rem 1rem;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .login-card .btn-submit,
+    .register-card .btn-submit {
+        min-height: 48px;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .login-card .password-wrapper,
+    .login-card .password-wrap {
+        width: 100%;
+    }
+
+    .step-indicator {
+        gap: 0.25rem;
+    }
+
+    .step {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+
+    .step-line {
+        max-width: 24px;
+    }
+
+    /* Prevent horizontal scroll */
+    body { overflow-x: hidden; }
+}
+
+@media (max-width: 480px) {
+    .auth-card,
+    .login-card,
+    .register-card {
+        padding: 1rem 0.875rem;
+        border-radius: 12px;
+    }
+
+    .auth-header h1,
+    .login-header h1,
+    .register-header h1 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Social Proof Line */
+.social-proof-line {
+    font-size: 0.85rem;
+    color: var(--success);
+    font-weight: 600;
+    margin-top: 0.5rem;
+}

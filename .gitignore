@@ -1,0 +1,5 @@
+.env
+vendor/
+php_errors.log
+cron_log.txt
+email_errors.log

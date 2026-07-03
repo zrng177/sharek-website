@@ -1,0 +1,37 @@
+/* Sharek Kurdish Typography */
+/* Kurdish Sorani (سۆرانی) - RTL Direction */
+
+html {
+    direction: rtl;
+}
+
+body {
+    font-family: 'Vazirmatn', Tahoma, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.display-text {
+    font-weight: 900;
+    line-height: 1.2;
+}
+
+input::placeholder,
+textarea::placeholder {
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    opacity: 0.6;
+}
+
+.otp-digit {
+    font-family: 'Vazirmatn', monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.1em;
+}

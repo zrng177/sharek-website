@@ -1,0 +1,42 @@
+{
+  "name": "شەریک - هاوبەشکردنی گەشت",
+  "short_name": "شەریک",
+  "description": "یەکەمین پلاتفۆرمی هاوبەشکردنی گەشت لە کوردستان",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#1e3a8a",
+  "orientation": "portrait",
+  "lang": "ku",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["transport", "travel"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "گەشتەکان",
+      "short_name": "گەشت",
+      "description": "گەشتی گونجاو بدۆزەرەوە",
+      "url": "./dashboard.php#live-map-section"
+    },
+    {
+      "name": "تۆمارکردن",
+      "short_name": "تۆمارکردن",
+      "description": "هەژمارێکی نوێ دروست بکە",
+      "url": "./register.php"
+    }
+  ]
+}

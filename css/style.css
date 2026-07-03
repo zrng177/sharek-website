@@ -1,0 +1,3072 @@
+/*
+    Sharek v1.5 - Main Stylesheet
+    
+    @file style.css
+    @date 2026-05-25
+    @description Comprehensive styling system for Sharek carpooling platform
+                 with CSS variables, dark mode support, and responsive design
+    @version 1.5.0
+    
+    Design System Features:
+    - CSS custom properties for theming
+    - Dark mode support via body.dark-mode class
+    - Responsive RTL layout
+    - Consistent use of .badge, .btn-custom classes
+    - Semantic color variables (--success, --warning, --info, --danger)
+*/
+
+/* Import CSS Variables and Kurdish Typography */
+@import url('css/variables.css');
+@import url('css/kurdish-typography.css');
+
+/* Variables are now in variables.css */
+
+/* ==========================================================================
+   2. Reset Rules
+   ========================================================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    direction: rtl;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+img, svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+/* ==========================================================================
+   3. Typography & RTL Alignment — Vazirmatn
+   ========================================================================== */
+body {
+    font-family: 'Vazirmatn', 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-secondary);
+    line-height: 1.65;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    text-align: right;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* ==========================================================================
+   4. Layout Structure
+   ========================================================================== */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    width: 100%;
+}
+
+.main {
+    flex: 1;
+    padding: var(--space-xl) 0;
+}
+
+.section {
+    display: none;
+    animation: fadeSlideIn 0.35s ease forwards;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   5. Components
+   ========================================================================== */
+
+/* ── Header ── */
+.header {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.82);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    color: var(--text-primary);
+    padding: 0.875rem 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+body.dark-mode .header {
+    background: rgba(9, 13, 22, 0.75);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+body.dark-mode .logo {
+    color: var(--text-white);
+}
+
+.logo::before {
+    content: '🚗';
+    font-size: 1.3rem;
+}
+
+/* ── Navigation ── */
+.nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.nav-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1.5px solid var(--border);
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--ease);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.nav-btn:hover {
+    background: var(--bg-card-alt);
+    border-color: var(--border-focus);
+    transform: translateY(-1px);
+}
+
+.nav-btn:active {
+    transform: scale(0.96);
+}
+
+.nav-btn.active {
+    background: white;
+    color: var(--navy);
+    border-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+body.dark-mode .nav-btn.active {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+}
+
+/* ── Header Auth Controls ── */
+.header-auth {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ── Filter Card ── */
+.filter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--space-lg);
+    overflow: hidden;
+}
+
+.filter-card-header {
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card-alt);
+}
+
+.filter-card-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.filter-card-body {
+    padding: var(--space-lg);
+}
+
+.filter-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.filter-row:last-child {
+    margin-bottom: 0;
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 280px;
+}
+
+.filter-item-full {
+    flex: 1 1 100%;
+    min-width: 100%;
+}
+
+.filter-item label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* Form Inputs */
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: var(--ease);
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--navy-glow);
+    background: var(--bg-card);
+}
+
+.form-input::placeholder {
+    color: var(--text-subtle);
+}
+
+.form-input-small {
+    width: 80px;
+}
+
+/* Proximity Inputs */
+.proximity-inputs {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--navy);
+}
+
+.proximity-label {
+    font-size: 0.875rem;
+    color: var(--text-subtle);
+    font-weight: 500;
+}
+
+/* Button Full Width */
+.btn-full {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .filter-item {
+        min-width: 100%;
+    }
+    
+    .filter-item-full {
+        min-width: 100%;
+    }
+    
+    .filter-card-body {
+        padding: var(--space-md);
+    }
+}
+
+/* ── Delivery Hint Badge ── */
+.delivery-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-card-alt);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+/* ── Service Type Badges ── */
+.badge-passenger,
+.badge-delivery,
+.badge-both {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: var(--ease);
+}
+
+.badge-passenger {
+    background: rgba(30, 58, 138, 0.1);
+    color: var(--navy);
+    border: 1px solid rgba(30, 58, 138, 0.2);
+}
+
+.badge-delivery {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge-both {
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+body.dark-mode .badge-passenger {
+    background: rgba(30, 58, 138, 0.25);
+    color: #93c5fd;
+    border-color: rgba(30, 58, 138, 0.4);
+}
+
+body.dark-mode .badge-delivery {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.4);
+}
+
+body.dark-mode .badge-both {
+    background: rgba(99, 102, 241, 0.2);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.4);
+}
+
+/* ── ETA Badge ── */
+.badge-eta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: var(--info-bg);
+    color: var(--info);
+    border: 1px solid rgba(2, 132, 199, 0.2);
+    transition: var(--ease);
+}
+
+.badge-eta-learning {
+    background: var(--warning-bg);
+    color: var(--warning);
+    border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+body.dark-mode .badge-eta {
+    background: rgba(2, 132, 199, 0.2);
+    color: #7dd3fc;
+    border-color: rgba(2, 132, 199, 0.4);
+}
+
+body.dark-mode .badge-eta-learning {
+    background: rgba(217, 119, 6, 0.2);
+    color: #fbbf24;
+    border-color: rgba(217, 119, 6, 0.4);
+}
+
+/* ── Dark Mode Select Input Contrast Fix ── */
+body.dark-mode select.form-control,
+body.dark-mode select.form-control option,
+body.dark-mode #trip-service-type,
+body.dark-mode #trip-service-type option,
+body.dark-mode select,
+body.dark-mode select option,
+body.dark-mode input:read-only,
+body.dark-mode select:read-only {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.user-welcome {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.45rem 0.85rem;
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
+
+body.dark-mode .user-welcome {
+    color: var(--text-white);
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.15);
+}
+
+.nav-btn-auth, .nav-btn-logout {
+    white-space: nowrap;
+}
+
+/* ── Theme Toggle ── */
+.theme-toggle {
+    background: var(--bg-card-alt);
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.45rem 0.6rem;
+    border-radius: var(--radius-md);
+    transition: var(--ease);
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--border);
+    transform: scale(1.08);
+}
+
+.theme-toggle:active {
+    transform: scale(0.96);
+}
+
+body.dark-mode .theme-toggle {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+    color: #fbbf24;
+}
+
+body.dark-mode .theme-toggle:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* ── Section Headers ── */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.section-header h2 {
+    font-size: 1.75rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* ── Dashboard Stats ── */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.dashboard-header h2 {
+    font-size: 2rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+}
+
+.dashboard-header p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    transition: var(--ease);
+    border: 1px solid var(--border);
+    min-height: 120px;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.stat-info h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--navy);
+}
+
+/* ── Trips Grid ── */
+.recent-trips {
+    margin-top: var(--space-lg);
+}
+
+.recent-trips h3 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    font-weight: 700;
+}
+
+.trips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: var(--space-lg);
+}
+
+/* ── Trip Card ── */
+.trip-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: var(--ease);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(30,58,138,0.18);
+}
+
+/* Card Header: Driver Info */
+.trip-card-header {
+    background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: var(--text-white);
+    padding: 1rem var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.trip-driver-info {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.trip-driver-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.35);
+}
+
+.trip-driver-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.trip-driver-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #d1fae5;
+    background: rgba(5,150,105,0.35);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius-full);
+    margin-top: 2px;
+    width: fit-content;
+}
+
+.badge-verified::before { content: '✔ '; }
+
+.trip-price {
+    font-size: 1.15rem;
+    font-weight: 800;
+    background: rgba(255,255,255,0.14);
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Card Body: Route & Details */
+.trip-card-body {
+    padding: var(--space-md);
+    flex: 1;
+}
+
+/* Visual Route Path */
+.trip-route-visual {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-md);
+    padding: 0.75rem var(--space-sm);
+    background: var(--bg-card-alt);
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--border);
+}
+
+.trip-route-city {
+    flex: 1;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.trip-route-city.destination {
+    text-align: start;
+}
+
+.trip-route-arrow {
+    font-size: 1.2rem;
+    color: var(--navy);
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.trip-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.trip-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.trip-info-item .info-icon {
+    width: 22px;
+    text-align: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.trip-info-item span:last-child {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Seats Badge */
+.trip-seats {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+}
+
+.trip-seats.available { background: var(--success-bg); color: var(--success); }
+.trip-seats.limited   { background: var(--warning-bg); color: var(--warning); }
+.trip-seats.full      { background: var(--danger-bg);  color: var(--danger);  }
+
+/* Card Footer */
+.trip-card-footer {
+    padding: 0.85rem var(--space-md);
+    background: var(--bg-card-alt);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.my-trip-footer {
+    justify-content: flex-end;
+}
+
+/* Contact Reveal Panel */
+.driver-contact-panel {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding: 0.75rem var(--space-sm);
+    margin-top: 0.5rem;
+    background: var(--bg-card-alt);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+/* ── Buttons ── */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.25rem;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 700;
+    transition: var(--ease);
+    min-height: 44px;
+    touch-action: manipulation;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.btn:active, button:active, .nav-btn:active {
+    transform: scale(0.97) !important;
+}
+
+.btn:disabled {
+    opacity: 0.52;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-primary {
+    background: var(--navy);
+    color: var(--text-white);
+    box-shadow: 0 3px 10px rgba(30,58,138,0.28);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--navy-mid);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 16px rgba(30,58,138,0.36);
+}
+
+.btn-secondary {
+    background: var(--bg-card-alt);
+    color: var(--text-secondary);
+    border: 1.5px solid var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: var(--border);
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+    box-shadow: 0 3px 10px rgba(220,38,38,0.22);
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+    background: #047857;
+    transform: translateY(-2px);
+}
+
+.btn-book {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: var(--ease);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+}
+
+.btn-book:hover:not(:disabled) {
+    background: var(--navy-mid);
+    transform: translateY(-2px);
+}
+
+.btn-book:disabled {
+    background: var(--text-subtle);
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* WhatsApp & Call */
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #25D366;
+    color: white;
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: var(--ease);
+    min-height: 40px;
+}
+
+.whatsapp-btn:hover { background: #128C7E; transform: translateY(-2px); }
+.whatsapp-btn svg { flex-shrink: 0; }
+
+.call-btn, .wa-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.55rem 1rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--ease);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+}
+
+.call-btn { background: var(--navy-light); color: white; }
+.call-btn:hover { background: var(--navy); transform: translateY(-2px); }
+.wa-btn   { background: #25D366; color: white; }
+.wa-btn:hover { background: #128C7E; transform: translateY(-2px); }
+
+/* Copy Phone Button */
+.copy-phone-btn, .btn-copy-phone {
+    background: var(--bg-card-alt);
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: var(--ease);
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.copy-phone-btn:hover, .btn-copy-phone:hover {
+    background: var(--border);
+}
+
+/* Swap Button */
+.swap-btn {
+    background: var(--bg-card-alt);
+    border: 1.5px solid var(--border);
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0.5rem 0.65rem;
+    border-radius: var(--radius-sm);
+    transition: var(--ease);
+    align-self: center;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swap-btn:hover {
+    background: var(--border);
+    transform: rotate(180deg);
+}
+
+/* Map Hint */
+.map-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-sm);
+}
+
+/* ── Forms ── */
+.form {
+    background: var(--bg-card);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid var(--border);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.form-group label {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 0.88rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 0.75rem var(--space-sm);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    background: var(--bg-input);
+    color: var(--text-secondary);
+    transition: var(--ease);
+    width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 4px var(--navy-glow);
+    background: var(--bg-card);
+}
+
+.form-group input::placeholder {
+    color: var(--text-subtle);
+}
+
+/* ── Date & Time Input Styling for RTL ── */
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"] {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Webkit datetime picker overrides */
+::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
+    cursor: pointer;
+}
+
+::-webkit-datetime-edit {
+    direction: rtl;
+    text-align: right;
+}
+
+::-webkit-datetime-edit-fields-wrapper {
+    direction: rtl;
+}
+
+/* Firefox datetime picker overrides */
+::-moz-datetime-edit {
+    direction: rtl;
+}
+
+input[type="date"]::-webkit-datetime-edit,
+input[type="time"]::-webkit-datetime-edit,
+input[type="datetime-local"]::-webkit-datetime-edit {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Search Actions */
+.search-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.search-actions .btn { flex: 1; min-width: 120px; }
+
+/* Amenities Grid */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: var(--space-md);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    transition: var(--ease);
+    user-select: none;
+}
+
+.checkbox-label:hover {
+    border-color: var(--border-focus);
+    background: var(--navy-glow);
+    color: var(--navy);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    accent-color: var(--navy);
+    flex-shrink: 0;
+}
+
+/* ── Modals ── */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    inset: 0;
+    background: rgba(15,23,42,0.55);
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    backdrop-filter: blur(3px);
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90dvh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    animation: modalPop 0.25s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.92) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg-card);
+    z-index: 1;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: var(--bg-card-alt);
+    border: 1.5px solid var(--border);
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    transition: var(--ease);
+    flex-shrink: 0;
+}
+
+.modal-close:hover {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.modal-body {
+    padding: var(--space-lg);
+}
+
+/* ── Auth Tabs ── */
+.auth-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: var(--space-lg);
+    background: var(--bg-card-alt);
+    border-radius: var(--radius-sm);
+    padding: 0.25rem;
+}
+
+.auth-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    transition: var(--ease);
+    min-height: 44px;
+}
+
+.auth-tab:hover {
+    color: var(--text-secondary);
+}
+
+.auth-tab.active {
+    background: var(--navy);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.auth-form { display: none; }
+.auth-form.active { display: block; }
+
+.auth-form .btn {
+    width: 100%;
+    margin-top: var(--space-md);
+    font-size: 1rem;
+}
+
+.auth-form .form-group,
+#booking-form .form-group {
+    margin-bottom: 0.85rem;
+    text-align: right;
+}
+
+#booking-form .form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+/* ── Booking Modal Extras ── */
+.booking-seats-hint {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    margin-bottom: 0.6rem;
+    text-align: right;
+    font-weight: 600;
+}
+
+.form-error {
+    color: var(--danger);
+    font-size: 0.88rem;
+    margin-bottom: 0.6rem;
+    padding: 0.55rem 0.85rem;
+    background: var(--danger-bg);
+    border-radius: var(--r-sm);
+    text-align: right;
+    font-weight: 600;
+    border-right: 3px solid var(--danger);
+}
+
+.booking-contact {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+    text-align: right;
+}
+
+.booking-contact h3 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-h);
+}
+
+.booking-contact-name,
+.booking-contact-phone {
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--text-body);
+    font-size: 0.95rem;
+}
+
+.booking-contact-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.85rem;
+}
+
+.booking-contact-actions .call-btn,
+.booking-contact-actions .wa-btn {
+    flex: 1;
+    min-width: 130px;
+}
+
+/* ── Trip Actions ── */
+.trip-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ── Alert System ── */
+#alert-container {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 360px;
+    width: calc(100% - 2rem);
+}
+
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.85rem var(--space-md);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-md);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--ease);
+    border-right: 4px solid transparent;
+    direction: rtl;
+    text-align: right;
+}
+
+.alert-success { background: var(--success-bg); color: var(--success); border-color: var(--success); }
+.alert-error   { background: var(--danger-bg);  color: var(--danger);  border-color: var(--danger);  }
+.alert-warning { background: var(--warning-bg); color: var(--warning); border-color: var(--warning); }
+.alert-info    { background: var(--info-bg);    color: var(--info);    border-color: var(--info);    }
+
+.alert-icon   { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.alert-message { flex: 1; line-height: 1.45; }
+
+.alert-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: currentColor;
+    padding: 0;
+    opacity: 0.6;
+    flex-shrink: 0;
+    line-height: 1;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.alert-close:hover { opacity: 1; }
+
+/* ── Map Container ── */
+.map-container {
+    width: 100%;
+    height: 380px;
+    margin-bottom: var(--space-lg);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+#dashboard-map {
+    height: 380px;
+    width: 100%;
+    border-radius: var(--r-md);
+}
+
+.trip-map-container {
+    height: 380px;
+    width: 100%;
+    border-radius: var(--r-md);
+    position: relative;
+}
+
+#map {
+    height: 300px;
+    width: 100%;
+    border-radius: 12px;
+    margin: 15px 0;
+    position: relative;
+    border: 1px solid #e2e8f0;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+    z-index: 10;
+}
+
+/* ── Loading Spinner ── */
+.loading-spinner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid var(--border);
+    border-top-color: var(--navy);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+.spinner-small {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border);
+    border-top-color: var(--navy);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Back to Top Button ── */
+#backToTopBtn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+    transition: var(--ease);
+    align-items: center;
+    justify-content: center;
+}
+
+#backToTopBtn:hover {
+    background: var(--navy-mid);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+#backToTopBtn.visible {
+    display: flex;
+}
+
+/* ── Empty State ── */
+.empty-state {
+    text-align: center;
+    padding: var(--space-2xl) var(--space-md);
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-lg);
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-lg);
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+}
+
+.empty-state h3 {
+    font-size: 1.25rem;
+    color: var(--text-h);
+    margin-bottom: var(--space-sm);
+    font-weight: 700;
+}
+
+.empty-state p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ── Dark Mode Card Adjustments ── */
+body.dark-mode .trip-card          { background: var(--bg-card); }
+body.dark-mode .form               { background: var(--bg-card); }
+body.dark-mode .stat-card          { background: var(--bg-card); }
+body.dark-mode .modal-content      { background: var(--bg-card); }
+body.dark-mode .modal-header       { background: var(--bg-card); }
+body.dark-mode .trip-card-footer   { background: var(--bg-card-alt); }
+body.dark-mode .trip-route-visual  { background: var(--bg-card-alt); }
+body.dark-mode .auth-tabs          { background: var(--bg-card-alt); }
+body.dark-mode .filter-card        { background: var(--bg-card); }
+body.dark-mode .filter-card-header { background: var(--bg-card-alt); }
+body.dark-mode .empty-state        { background: var(--bg-card); }
+body.dark-mode .form-group input,
+body.dark-mode .form-group select,
+body.dark-mode .form-group textarea { background: var(--bg-input); color: var(--text-body); }
+
+/* ── Rating Modal Dark Mode Sync ── */
+body.dark-mode #rating-modal .modal-content {
+    background: var(--bg-card);
+    border-color: var(--border);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+body.dark-mode #rating-modal .modal-header {
+    background: var(--bg-card);
+    border-color: var(--border);
+}
+body.dark-mode #rating-modal #rating-comment {
+    background: var(--bg-input);
+    color: var(--text-body);
+    border-color: var(--border);
+}
+body.dark-mode #rating-modal .star-rating-item {
+    color: var(--text-subtle);
+}
+body.dark-mode #rating-modal .star-rating-item.active,
+body.dark-mode #rating-modal .star-rating-item:hover {
+    color: #f59e0b;
+    text-shadow: 0 0 18px rgba(245, 158, 11, 0.6);
+}
+body.dark-mode .driver-rating { background: rgba(245, 158, 11, 0.12); }
+body.dark-mode #rating-modal .rating-modal-intro {
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.2);
+}
+body.dark-mode #rating-modal .rating-driver-label { color: var(--text-muted); }
+
+/* ── Rating Modal ── */
+#rating-modal {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(15, 23, 42, 0.6);
+    animation: overlayFadeIn 0.22s ease forwards;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+#rating-modal .modal-content {
+    background: var(--bg-card);
+    border-radius: var(--r-lg);
+    border: 1px solid var(--border);
+    box-shadow:
+        0 24px 64px rgba(15, 23, 42, 0.22),
+        0 8px 24px rgba(15, 23, 42, 0.14),
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    animation: modalPop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Intro strip inside modal body */
+.rating-modal-intro {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem var(--space-md);
+    background: rgba(245, 158, 11, 0.07);
+    border: 1px solid rgba(245, 158, 11, 0.18);
+    border-radius: var(--r-md);
+    margin-bottom: var(--space-lg);
+}
+
+.rating-modal-intro-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.rating-driver-label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.rating-driver-label strong {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-h);
+    font-weight: 800;
+}
+
+/* Stars wrapper */
+.star-rating-container {
+    display: flex;
+    gap: 0.35rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: nowrap;
+    padding: 0.5rem 0;
+}
+
+.star-rating-item {
+    font-size: 2.6rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-subtle);
+    transition:
+        color       0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        text-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform   0.2s ease;
+    user-select: none;
+    padding: 0.2rem 0.25rem;
+    display: inline-block;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.star-rating-item:hover {
+    transform: scale(1.18);
+    color: #f59e0b;
+    text-shadow: 0 0 14px rgba(245, 158, 11, 0.5);
+}
+
+.star-rating-item.active {
+    color: #f59e0b;
+    text-shadow: 0 0 14px rgba(245, 158, 11, 0.5);
+}
+
+.star-rating-item:active {
+    transform: scale(1.08);
+}
+
+/* Rating label below stars */
+.star-rating-label {
+    text-align: center;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+    min-height: 1.4em;
+    transition: color 0.2s ease;
+}
+
+/* Comment textarea */
+#rating-comment {
+    width: 100%;
+    padding: 0.8rem var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    font-size: 0.95rem;
+    background: var(--bg-input);
+    color: var(--text-body);
+    transition:
+        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow   0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        background   0.2s ease;
+    resize: vertical;
+    min-height: 110px;
+    font-family: inherit;
+    line-height: 1.6;
+    direction: rtl;
+    text-align: right;
+}
+
+#rating-comment:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--navy-glow);
+    background: var(--bg-card);
+}
+
+#rating-comment::placeholder {
+    color: var(--text-subtle);
+    font-size: 0.9rem;
+}
+
+/* Submit button */
+#submit-review-btn {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: var(--text-white);
+    border: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: var(--r-md);
+    cursor: pointer;
+    font-size: 0.97rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition:
+        transform   0.18s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow  0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    width: 100%;
+    box-shadow: 0 4px 14px rgba(30, 58, 138, 0.32);
+    margin-top: var(--space-md);
+}
+
+#submit-review-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(30, 58, 138, 0.42);
+}
+
+#submit-review-btn:active:not(:disabled) {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(30, 58, 138, 0.28);
+}
+
+#submit-review-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Driver Rating Badge */
+.driver-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.15);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--r-full);
+    margin-top: 0.2rem;
+}
+
+/* Via Cities Badge */
+.via-city-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--navy);
+    background: var(--navy-glow);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--r-sm);
+    margin: 0.15rem;
+    white-space: nowrap;
+}
+
+.via-cities-row {
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: flex-start;
+}
+
+.via-cities-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.via-cities-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Rating Button — prominent amber-accent trigger */
+.btn-rate {
+    background: rgba(245, 158, 11, 0.09);
+    border: 1.5px solid rgba(245, 158, 11, 0.35);
+    color: #d97706;
+    padding: 0.5rem 1rem;
+    border-radius: var(--r-md);
+    cursor: pointer;
+    font-size: 0.86rem;
+    font-weight: 700;
+    transition:
+        background   0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        color        0.2s cubic-bezier(0.4, 0, 0.2, 1),
+        transform    0.18s ease,
+        box-shadow   0.18s ease;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-rate:hover {
+    background: rgba(245, 158, 11, 0.18);
+    border-color: #f59e0b;
+    color: #b45309;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.22);
+}
+
+.btn-rate:active {
+    transform: scale(0.96);
+    box-shadow: none;
+}
+
+body.dark-mode .btn-rate {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+}
+
+body.dark-mode .btn-rate:hover {
+    background: rgba(245, 158, 11, 0.2);
+    border-color: #f59e0b;
+    color: #fde68a;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.25);
+}
+
+/* Cancel Trip Button */
+.btn-cancel-trip {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: var(--ease);
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+}
+
+.btn-cancel-trip:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+.delete-trip-btn {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: var(--ease);
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+}
+
+.delete-trip-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-2px);
+}
+
+/* Button Text and Loading States */
+.btn-text {
+    display: inline;
+}
+
+.btn-loading {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Trip Route (for my trips) */
+.trip-route {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-h);
+}
+
+/* Trip Contact Reveal */
+.trip-contact-reveal {
+    margin-top: var(--space-md);
+}
+
+/* My Booking Footer */
+.my-booking-footer {
+    justify-content: flex-end;
+}
+
+/* My Trip Card */
+.my-trip-card {
+    border-left: 4px solid var(--navy);
+}
+
+/* My Booking Card */
+.my-booking-card {
+    border-left: 4px solid var(--success);
+}
+
+/* Card Copy Phone Button */
+.card-copy-phone {
+    background: var(--bg-card-alt);
+    border: 1.5px solid var(--border);
+    color: var(--text-body);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--r-sm);
+    transition: var(--ease);
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.card-copy-phone:hover {
+    background: var(--border);
+}
+
+/* Search Button */
+.btn-search {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--r-md);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: var(--ease);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-search:hover:not(:disabled) {
+    background: var(--navy-mid);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   6. Media Queries — Mobile First
+   ========================================================================== */
+@media (max-width: 768px) {
+    .container { padding: 0 0.85rem; }
+
+    .main { padding: var(--space-md) 0; }
+
+    /* Header stacks on small screens */
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6rem;
+    }
+
+    .logo { justify-content: center; }
+
+    .nav {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-btn {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem 0.6rem;
+        font-size: 0.82rem;
+    }
+
+    .header-auth {
+        justify-content: center;
+    }
+
+    /* Filter card responsive */
+    .filter-row {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .filter-item {
+        min-width: 100%;
+    }
+
+    /* Trips in single column */
+    .trips-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .trip-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .trip-card-footer .btn-book,
+    .trip-card-footer .btn {
+        width: 100%;
+    }
+
+    .driver-contact-panel {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .driver-contact-panel .call-btn,
+    .driver-contact-panel .btn-copy-phone {
+        width: 100%;
+    }
+
+    /* Form collapses to single column */
+    .form-row {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form { padding: var(--space-md); }
+
+    /* Map shrinks on mobile */
+    .map-container { height: 260px; }
+
+    /* Stats in 2-col grid */
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .stat-card {
+        padding: var(--space-md) var(--space-sm);
+        flex-direction: column;
+        text-align: center;
+        gap: 0.4rem;
+    }
+
+    .modal-body { padding: var(--space-md); }
+    .modal-content { margin: 0.5rem; }
+
+    /* Search actions full-width */
+    .search-actions { flex-direction: column; }
+    .search-actions .btn { width: 100%; }
+
+    .amenities-grid { grid-template-columns: 1fr; }
+
+    /* Booking contact actions */
+    .booking-contact-actions { flex-direction: column; }
+    .booking-contact-actions .call-btn,
+    .booking-contact-actions .wa-btn { width: 100%; }
+
+    /* Alerts from left edge on mobile */
+    #alert-container {
+        top: auto;
+        bottom: 1rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        max-width: 100%;
+        width: auto;
+    }
+
+    #backToTopBtn {
+        bottom: 4.5rem;
+        right: 1rem;
+    }
+
+    html { font-size: 15px; }
+}
+
+@media (max-width: 420px) {
+    .nav-btn { font-size: 0.78rem; padding: 0.45rem 0.4rem; }
+    .dashboard-stats { grid-template-columns: 1fr; }
+    .trip-price { font-size: 0.95rem; }
+    
+    /* Touch-friendly buttons */
+    .btn, .btn-book, .btn-submit {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 0.75rem 1rem;
+    }
+    
+    /* Better spacing on small screens */
+    .trip-card { padding: 1rem; }
+    .stat-card { padding: 0.75rem; }
+    
+    /* Prevent horizontal scroll */
+    body { overflow-x: hidden; }
+    * { max-width: 100%; }
+    
+    /* Better text readability */
+    html { font-size: 14px; }
+    
+    /* Modal adjustments */
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        margin: 0.5rem;
+    }
+    
+    /* Form adjustments */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Prevent iOS zoom */
+        padding: 0.875rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .container { padding: 0 0.5rem; }
+    .nav-btn { font-size: 0.7rem; padding: 0.4rem 0.35rem; }
+    .trip-card-footer .btn-book { font-size: 0.85rem; }
+}
+
+/* ==========================================================================
+   Custom Toast Notification System
+   ========================================================================== */
+#toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    pointer-events: none;
+}
+
+.toast {
+    pointer-events: auto;
+    min-width: 300px;
+    max-width: 400px;
+    padding: 1rem 1.25rem;
+    border-radius: var(--r-md);
+    background: var(--bg-card);
+    box-shadow: var(--shadow-lg);
+    border-left: 4px solid var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    animation: slideIn 0.3s ease-out;
+    transition: all 0.3s ease;
+}
+
+.toast.success {
+    border-left-color: var(--success);
+}
+
+.toast.error {
+    border-left-color: var(--danger);
+}
+
+.toast.warning {
+    border-left-color: var(--warning);
+}
+
+.toast.info {
+    border-left-color: var(--info);
+}
+
+.toast-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.toast-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.toast-message {
+    font-size: 0.95rem;
+    color: var(--text-body);
+    line-height: 1.5;
+    direction: rtl;
+    text-align: right;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-sm);
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.toast-close:hover {
+    background: var(--bg-card-alt);
+    color: var(--text-h);
+}
+
+.toast.removing {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   Re-Center Map Button (Modern FAB)
+   ========================================================================== */
+.recenter-map-btn {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border: 3px solid white;
+    box-shadow: 0 4px 20px rgba(30, 58, 138, 0.4), 0 2px 8px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.recenter-map-btn:hover {
+    background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy-light) 100%);
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 6px 30px rgba(30, 58, 138, 0.5), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.recenter-map-btn:active {
+    transform: scale(1.05) rotate(-5deg);
+    box-shadow: 0 2px 15px rgba(30, 58, 138, 0.4), 0 1px 6px rgba(0, 0, 0, 0.15);
+}
+
+.recenter-map-btn::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.recenter-map-btn:hover::before {
+    opacity: 0.3;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.1;
+    }
+}
+
+/* ==========================================================================
+   v1.2 — Readonly Input & Select Contrast Fix
+   Ensures GPS/map-locked fields remain legible in both light and dark mode.
+   :read-only targets <input readonly> elements; the select rule covers all
+   JS-locked dropdowns (pointer-events:none) that can't use the CSS pseudo.
+   ========================================================================== */
+
+/* Light mode — keep normal surface, just signal "locked" with dashed border */
+input:read-only {
+    background-color: var(--bg-input) !important;
+    color: var(--text-body) !important;
+    opacity: 1 !important;
+    border-style: dashed;
+    cursor: default;
+}
+
+/* Dark mode — force dark surface + white text so the value is readable */
+body.dark-mode input:read-only,
+body.dark-mode select {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+/* Explicit rule matching the spec requirement exactly */
+body.dark-mode input:read-only,
+body.dark-mode select {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+}
+
+/* Covers JS-locked selects set via style="pointer-events:none" */
+body.dark-mode select[style*="pointer-events"] {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   v1.5 — Icon Styling for Sharek UI
+   Custom icon classes for add, roadster, path, and destination icons
+   ========================================================================== */
+
+/* Base icon styles */
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    object-fit: contain;
+}
+
+/* add.png - Icon for Add New Trip / Create Subscription buttons */
+.icon-add {
+    width: 20px;
+    height: 20px;
+    margin-inline-start: 8px;
+    margin-inline-end: 4px;
+}
+
+/* Flexbox container for button with icon */
+.btn-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* roadster.png - Icon for car type in trip list */
+.icon-roadster {
+    width: 24px;
+    height: 24px;
+    margin-inline-start: 8px;
+    margin-inline-end: 4px;
+}
+
+/* path.png - Icon for route display between start and end points */
+.icon-path {
+    width: 28px;
+    height: 28px;
+    margin: 0 8px;
+    opacity: 0.7;
+}
+
+/* destination.png - Icon for drop-off point in table */
+.icon-destination {
+    width: 20px;
+    height: 20px;
+    margin-inline-start: 6px;
+    margin-inline-end: 4px;
+}
+
+/* Dark mode adjustments for icons */
+body.dark-mode .icon {
+    filter: brightness(1.1);
+}
+
+/* Password wrapper for show/hide functionality */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-left: 3rem;
+}
+
+.toggle-password {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    padding: 0;
+}
+
+.toggle-password:hover {
+    color: var(--text-body);
+}
+
+/* Dashboard Map Container */
+.map-container {
+    width: 100%;
+    height: 400px;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.map-container #dashboard-map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Popup styling for map markers */
+.popup-trip-info {
+    min-width: 200px;
+    font-family: inherit;
+}
+
+.popup-trip-info h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--navy);
+    font-size: 1rem;
+}
+
+.popup-trip-info .route {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.popup-trip-info .detail {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0.25rem 0;
+}
+
+.popup-trip-info .price {
+    font-weight: bold;
+    color: var(--navy);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
+
+/* Responsive adjustments for map and forms */
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px;
+    }
+    
+    .popup-trip-info {
+        min-width: 180px;
+        font-size: 0.875rem;
+    }
+    
+    .popup-trip-info h4 {
+        font-size: 0.875rem;
+    }
+    
+    .popup-trip-info .detail {
+        font-size: 0.75rem;
+    }
+    
+    .popup-trip-info .price {
+        font-size: 1rem;
+    }
+    
+    /* Form responsive adjustments */
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-group label {
+        font-size: 0.875rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+    
+    /* Modal responsive adjustments */
+    .modal-content {
+        width: 95%;
+        max-width: 95%;
+        margin: 1rem auto;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
+    
+    /* Button responsive adjustments */
+    .btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Navigation responsive adjustments */
+    .nav-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Dashboard stats responsive adjustments */
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-card h3 {
+        font-size: 0.875rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-container {
+        height: 250px;
+    }
+    
+    .popup-trip-info {
+        min-width: 160px;
+        font-size: 0.8125rem;
+    }
+    
+    .popup-trip-info h4 {
+        font-size: 0.8125rem;
+    }
+    
+    .popup-trip-info .detail {
+        font-size: 0.6875rem;
+    }
+    
+    .popup-trip-info .price {
+        font-size: 0.9375rem;
+    }
+    
+    /* Form responsive adjustments for small screens */
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    /* Modal responsive adjustments for small screens */
+    .modal-content {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+        max-height: 100vh;
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    /* Button responsive adjustments for small screens */
+    .btn {
+        width: 100%;
+        padding: 0.875rem;
+    }
+    
+    /* Navigation responsive adjustments for small screens */
+    .nav {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .nav-btn {
+        flex: 1 1 auto;
+        min-width: 80px;
+        font-size: 0.8125rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .icon-add {
+        width: 18px;
+        height: 18px;
+        margin-inline-start: 6px;
+        margin-inline-end: 3px;
+    }
+    
+    .icon-roadster {
+        width: 20px;
+        height: 20px;
+        margin-inline-start: 6px;
+        margin-inline-end: 3px;
+    }
+    
+    .icon-path {
+        width: 24px;
+        height: 24px;
+        margin: 0 6px;
+    }
+    
+    .icon-destination {
+        width: 18px;
+        height: 18px;
+        margin-inline-start: 4px;
+        margin-inline-end: 3px;
+    }
+    
+    .map-container {
+        height: 300px;
+    }
+}
+
+/* ==========================================================================
+   Dark Mode Map Inversion
+   ========================================================================== */
+body.dark-mode .leaflet-tile-container {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    transition: filter 0.3s ease;
+}
+
+body.dark-mode .leaflet-marker-icon,
+body.dark-mode .leaflet-popup-content-wrapper,
+body.dark-mode .leaflet-popup-tip {
+    filter: invert(100%) hue-rotate(180deg);
+}
+
+/* ==========================================================================
+   Admin Panel Styles
+   ========================================================================== */
+.admin-body {
+    background: var(--bg-page);
+    min-height: 100vh;
+    font-family: 'Vazirmatn', sans-serif;
+    direction: rtl;
+}
+
+.admin-login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+}
+
+.admin-login-form {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.admin-login-form h1 {
+    margin: 0 0 0.5rem 0;
+    color: var(--navy);
+    font-size: 1.75rem;
+}
+
+.admin-login-form p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.admin-login-form .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.admin-login-form label {
+    display: block;
+    text-align: right;
+    margin-bottom: 0.5rem;
+    color: var(--text-body);
+    font-weight: 500;
+}
+
+.admin-login-form input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: var(--r-md);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.admin-login-form input[type="password"]:focus {
+    outline: none;
+    border-color: var(--navy-light);
+}
+
+.admin-error {
+    color: var(--danger);
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--danger-bg);
+    border-radius: var(--r-md);
+    border: 1px solid #fecaca;
+}
+
+.admin-hint {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.admin-hint a {
+    color: var(--navy-light);
+    text-decoration: none;
+}
+
+.admin-hint a:hover {
+    text-decoration: underline;
+}
+
+.admin-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: var(--text-white);
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.admin-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.admin-header-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.admin-main {
+    padding-bottom: 3rem;
+}
+
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.admin-stat-card {
+    background: var(--bg-card);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.admin-stat-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.admin-stat-value {
+    font-size: 2.5rem;
+    color: var(--navy);
+    font-weight: 700;
+}
+
+.admin-table-section {
+    background: var(--bg-card);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.admin-table-section h2 {
+    margin: 0 0 1.5rem 0;
+    color: var(--navy);
+    font-size: 1.25rem;
+}
+
+.admin-table-wrap {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 1rem;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+.admin-table th {
+    background: var(--bg-card-alt);
+    font-weight: 700;
+    color: var(--text-body);
+    font-size: 0.9rem;
+}
+
+.admin-table tr:hover {
+    background: var(--bg-card-alt);
+}
+
+.admin-table td small {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.admin-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 180px;
+}
+
+.admin-inline-form {
+    margin: 0;
+}
+
+.btn-verify {
+    background: var(--success);
+    color: var(--text-white);
+    border: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-verify:hover {
+    background: #059669;
+}
+
+.btn-admin-delete {
+    background: var(--danger);
+    color: var(--text-white);
+    border: none;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    width: 100%;
+    transition: background 0.2s;
+}
+
+.btn-admin-delete:hover {
+    background: #dc2626;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--text-white);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0.5rem 1rem;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: var(--text-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+.badge-verified {
+    display: inline-block;
+    margin-top: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--success-bg);
+    color: #065f46;
+    border-radius: var(--r-xs);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Admin Responsive */
+@media (max-width: 768px) {
+    .admin-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .admin-header-inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .admin-header-actions {
+        justify-content: center;
+    }
+}
+
+/* Saved Routes Section */
+.saved-routes-section {
+    background: var(--bg-card);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.saved-routes-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.saved-routes-section .section-header h3 {
+    color: var(--navy);
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.saved-routes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.saved-route-card {
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.saved-route-card:hover {
+    border-color: var(--navy);
+    box-shadow: var(--shadow-sm);
+}
+
+.saved-route-card .route-name {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+}
+
+.saved-route-card .route-points {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-body);
+    font-size: 0.9rem;
+}
+
+.saved-route-card .route-points .arrow {
+    color: var(--text-muted);
+}
+
+.saved-route-card .route-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.saved-route-card .route-actions button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    border-radius: var(--r-sm);
+}
+
+.saved-route-card .btn-delete {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.saved-route-card .btn-delete:hover {
+    background: var(--danger);
+    color: white;
+}

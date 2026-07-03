@@ -1,0 +1,155 @@
+/*
+    Sharek v1.5 - Footer Styles
+    
+    @file footer.css
+    @date 2026-05-28
+    @description Footer layout styles with mobile responsiveness
+    @version 1.5.0
+*/
+
+/* ==========================================================================
+   Footer Layout
+   ========================================================================== */
+.footer {
+    background: var(--bg-card-alt);
+    border-top: 1px solid var(--border);
+    padding: 3rem 0 1.5rem;
+    margin-top: var(--space-2xl);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    color: var(--navy);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+body.dark-mode .footer-section h3 {
+    color: var(--text-white);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+    color: var(--text-body);
+    text-decoration: none;
+    transition: var(--ease);
+}
+
+.footer-section ul li a:hover {
+    color: var(--navy);
+}
+
+body.dark-mode .footer-section ul li a {
+    color: var(--text-muted);
+}
+
+body.dark-mode .footer-section ul li a:hover {
+    color: var(--text-white);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+body.dark-mode .footer {
+    background: var(--bg-card-alt);
+    border-top-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .footer-bottom {
+    border-top-color: rgba(255,255,255,0.08);
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Mobile Responsive - Footer Single Column
+   ========================================================================== */
+@media (max-width: 768px) {
+    .footer {
+        padding: 2rem 0 1rem;
+    }
+    
+    .footer-content {
+        padding: 0 var(--space-md);
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        font-size: 0.8rem;
+    }
+    
+    /* Touch-friendly footer links */
+    .footer-section ul li a {
+        padding: 0.5rem 0;
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 1.5rem 0 0.75rem;
+    }
+    
+    .footer-content {
+        padding: 0 var(--space-sm);
+    }
+    
+    .footer-grid {
+        gap: 1rem;
+    }
+    
+    .footer-section h3 {
+        font-size: 1rem;
+    }
+    
+    .footer-section ul li a {
+        font-size: 0.9rem;
+    }
+    
+    /* Prevent horizontal scroll */
+    body { overflow-x: hidden; }
+    * { max-width: 100%; }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .footer-section h3 {
+        font-size: 0.95rem;
+    }
+    
+    .footer-section ul li a {
+        font-size: 0.85rem;
+    }
+}

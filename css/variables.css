@@ -1,0 +1,155 @@
+/* Sharek CSS Variables */
+/* Single source of truth for CSS custom properties */
+
+:root {
+    /* Primary Colors */
+    --navy:           #0f2557;
+    --navy-mid:       #1e3a8a;
+    --navy-light:     #3b5fcf;
+    --blue:           #3b82f6;
+    --blue-light:     #60a5fa;
+    --blue-glow:      rgba(59,130,246,0.18);
+    --green:          #10b981;
+    --green-dark:     #059669;
+    --green-glow:     rgba(16,185,129,0.15);
+    --amber:          #f59e0b;
+    --gold:           #d4a832;
+    --red:            #dc2626;
+
+    /* Background Colors */
+    --bg:             #f0f4ff;
+    --bg-page:        #f8fafc;
+    --bg-card:        #ffffff;
+    --bg-card-alt:    #f1f5f9;
+    --bg-elevated:    #f1f5f9;
+    --bg-input:       #f8fafc;
+    --bg-header:      #1e3a8a;
+
+    /* Semantic Colors */
+    --success:        #059669;
+    --success-bg:     #d1fae5;
+    --warning:        #d97706;
+    --warning-bg:     #fef3c7;
+    --danger:         #dc2626;
+    --danger-bg:      #fee2e2;
+    --info:           #0284c7;
+    --info-bg:        #e0f2fe;
+
+    /* Text Colors */
+    --text-primary:   #0a1433;
+    --text-secondary: #374151;
+    --text-muted:     #6b7280;
+    --text-subtle:    #94a3b8;
+    --text-white:     #ffffff;
+
+    /* Border & UI */
+    --border:         #dde4f5;
+    --border-focus:   #3b5fcf;
+    --radius:         14px;
+    --radius-sm:      8px;
+    --radius-md:      10px;
+    --radius-lg:      22px;
+    --radius-xl:      24px;
+    --radius-full:    9999px;
+
+    /* Aliases for --r-* shorthand used in PHP pages */
+    --r-sm:   var(--radius-sm);
+    --r-md:   var(--radius-md);
+    --r-lg:   var(--radius-lg);
+    --r-xl:   var(--radius-xl);
+    --r-full: var(--radius-full);
+
+    /* Shadows */
+    --shadow:         0 4px 24px rgba(15,37,87,.10);
+    --shadow-lg:      0 12px 48px rgba(15,37,87,.16);
+    --shadow-xs:      0 1px 2px rgba(15,23,42,0.04), 0 4px 12px rgba(30,58,138,0.03);
+    --shadow-sm:      0 2px 8px rgba(15,23,42,0.07), 0 4px 16px rgba(30,58,138,0.04);
+    --shadow-md:      0 12px 32px -8px rgba(15,23,42,0.25), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-nav:     0 4px 20px rgba(30,58,138,0.18);
+
+    /* Spacing */
+    --space-xs:       0.25rem;
+    --space-sm:       0.5rem;
+    --space-md:       1rem;
+    --space-lg:       1.5rem;
+    --space-xl:       2rem;
+    --space-2xl:      3rem;
+
+    /* Transitions */
+    --transition:     0.25s cubic-bezier(.4,0,.2,1);
+    --ease:           all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-fast:      all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode {
+    /* Primary Colors */
+    --navy:           #3b82f6;
+    --navy-mid:       #60a5fa;
+    --navy-light:     #93c5fd;
+    --blue:           #60a5fa;
+    --blue-light:     #93c5fd;
+    --blue-glow:      rgba(96,165,250,0.18);
+    --green:          #10b981;
+    --green-dark:     #059669;
+    --green-glow:     rgba(16,185,129,0.15);
+    --amber:          #f59e0b;
+    --gold:           #d4a832;
+    --red:            #dc2626;
+
+    /* Background Colors */
+    --bg:             #070e1f;
+    --bg-page:        #090d16;
+    --bg-card:        #111827;
+    --bg-card-alt:    #1f2937;
+    --bg-elevated:    #1f2937;
+    --bg-input:       #111827;
+    --bg-header:      rgba(15, 23, 42, 0.85);
+
+    /* Semantic Colors — dark-appropriate */
+    --success:        #34d399;
+    --success-bg:     rgba(16,185,129,0.15);
+    --warning:        #fbbf24;
+    --warning-bg:     rgba(245,158,11,0.15);
+    --danger:         #f87171;
+    --danger-bg:      rgba(220,38,38,0.18);
+    --info:           #38bdf8;
+    --info-bg:        rgba(2,132,199,0.15);
+
+    /* Text Colors */
+    --text-primary:   #f0f6ff;
+    --text-secondary: #cbd5e1;
+    --text-muted:     #64748b;
+    --text-subtle:    #94a3b8;
+    --text-white:     #ffffff;
+
+    /* Border & UI */
+    --border:         #1e2d4a;
+    --border-focus:   #3b5fcf;
+    --radius:         14px;
+    --radius-sm:      8px;
+    --radius-md:      10px;
+    --radius-lg:      22px;
+    --radius-xl:      24px;
+    --radius-full:    9999px;
+
+    /* Shadows */
+    --shadow:         0 4px 24px rgba(0,0,0,.4);
+    --shadow-lg:      0 12px 48px rgba(0,0,0,.6);
+    --shadow-xs:      0 1px 2px rgba(15,23,42,0.04), 0 4px 12px rgba(30,58,138,0.03);
+    --shadow-sm:      0 2px 8px rgba(15,23,42,0.07), 0 4px 16px rgba(30,58,138,0.04);
+    --shadow-md:      0 12px 32px -8px rgba(15,23,42,0.25), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-nav:     0 4px 20px rgba(30,58,138,0.18);
+
+    /* Spacing */
+    --space-xs:       0.25rem;
+    --space-sm:       0.5rem;
+    --space-md:       1rem;
+    --space-lg:       1.5rem;
+    --space-xl:       2rem;
+    --space-2xl:      3rem;
+
+    /* Transitions */
+    --transition:     0.25s cubic-bezier(.4,0,.2,1);
+    --ease:           all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-fast:      all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}

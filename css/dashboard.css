@@ -1,0 +1,815 @@
+/*
+    Sharek v1.5 - Dashboard Styles
+    
+    @file dashboard.css
+    @date 2026-05-25
+    @description Dashboard styles: .dashboard-*, .trip-card, .search-*, .booking-*
+    @version 1.5.0
+*/
+
+/* ==========================================================================
+   Dashboard Stats
+   ========================================================================== */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.dashboard-header h2 {
+    font-size: 2rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+}
+
+.dashboard-header p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.stat-card {
+    background: var(--bg-card);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+    transition: var(--ease);
+    border: 1px solid var(--border);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    font-size: 2.4rem;
+    flex-shrink: 0;
+}
+
+.stat-info h3 {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.stat-number {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: var(--navy);
+}
+
+/* ==========================================================================
+   Trips Grid
+   ========================================================================== */
+.recent-trips {
+    margin-top: var(--space-lg);
+}
+
+.recent-trips h3 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    font-weight: 700;
+}
+
+.trips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: var(--space-lg);
+}
+
+/* ==========================================================================
+   Trip Card
+   ========================================================================== */
+.trip-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: var(--ease);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(30,58,138,0.18);
+}
+
+/* Card Header: Driver Info */
+.trip-card-header {
+    background: linear-gradient(120deg, var(--navy) 0%, var(--navy-mid) 100%);
+    color: var(--text-white);
+    padding: 1rem var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.trip-driver-info {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.trip-driver-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.35);
+}
+
+.trip-driver-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.trip-driver-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #d1fae5;
+    background: rgba(5,150,105,0.35);
+    padding: 0.1rem 0.45rem;
+    border-radius: var(--radius-full);
+    margin-top: 2px;
+    width: fit-content;
+}
+
+.badge-verified::before { content: '✔ '; }
+
+.trip-price {
+    font-size: 1.15rem;
+    font-weight: 800;
+    background: rgba(255,255,255,0.14);
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-md);
+    white-space: nowrap;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Card Body: Route & Details */
+.trip-card-body {
+    padding: var(--space-md);
+    flex: 1;
+}
+
+/* Visual Route Path */
+.trip-route-visual {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-md);
+    padding: 0.75rem var(--space-sm);
+    background: var(--bg-card-alt);
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--border);
+}
+
+.trip-route-city {
+    flex: 1;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.trip-route-city.destination {
+    text-align: start;
+}
+
+.trip-route-arrow {
+    font-size: 1.2rem;
+    color: var(--navy);
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.trip-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.trip-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.trip-info-item .info-icon {
+    width: 22px;
+    text-align: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.trip-info-item span:last-child {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Seats Badge */
+.trip-seats {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+}
+
+.trip-seats.available { background: var(--success-bg); color: var(--success); }
+.trip-seats.limited   { background: var(--warning-bg); color: var(--warning); }
+.trip-seats.full      { background: var(--danger-bg);  color: var(--danger);  }
+
+/* Card Footer */
+.trip-card-footer {
+    padding: 0.85rem var(--space-md);
+    background: var(--bg-card-alt);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.my-trip-footer {
+    justify-content: flex-end;
+}
+
+.my-booking-footer {
+    justify-content: flex-end;
+}
+
+/* Contact Reveal Panel */
+.driver-contact-panel {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding: 0.75rem var(--space-sm);
+    margin-top: 0.5rem;
+    background: var(--bg-card-alt);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+/* ==========================================================================
+   Filter Card
+   ========================================================================== */
+.filter-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--space-lg);
+    overflow: hidden;
+}
+
+.filter-card-header {
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card-alt);
+}
+
+.filter-card-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.filter-card-body {
+    padding: var(--space-lg);
+}
+
+.filter-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.filter-row:last-child {
+    margin-bottom: 0;
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 280px;
+}
+
+.filter-item-full {
+    flex: 1 1 100%;
+    min-width: 100%;
+}
+
+.filter-item label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* Delivery Hint Badge */
+.delivery-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-card-alt);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+/* ==========================================================================
+   Form Inputs
+   ========================================================================== */
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: var(--ease);
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--navy-glow);
+    background: var(--bg-card);
+}
+
+.form-input::placeholder {
+    color: var(--text-subtle);
+}
+
+.form-input-small {
+    width: 80px;
+}
+
+/* Proximity Inputs */
+.proximity-inputs {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.checkbox-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--navy);
+}
+
+.proximity-label {
+    font-size: 0.875rem;
+    color: var(--text-subtle);
+    font-weight: 500;
+}
+
+/* Button Full Width */
+.btn-full {
+    width: 100%;
+}
+
+/* ==========================================================================
+   Search Actions
+   ========================================================================== */
+.search-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.search-actions .btn { flex: 1; min-width: 120px; }
+
+/* Amenities Grid */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: var(--space-md);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    transition: var(--ease);
+    user-select: none;
+}
+
+.checkbox-label:hover {
+    border-color: var(--border-focus);
+    background: var(--navy-glow);
+    color: var(--navy);
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    accent-color: var(--navy);
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Trip Actions
+   ========================================================================== */
+.trip-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   Trip Route (for my trips)
+   ========================================================================== */
+.trip-route {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* Trip Contact Reveal */
+.trip-contact-reveal {
+    margin-top: var(--space-md);
+}
+
+/* ==========================================================================
+   My Trip Card
+   ========================================================================== */
+.my-trip-card {
+    border-left: 4px solid var(--navy);
+}
+
+/* My Booking Card */
+.my-booking-card {
+    border-left: 4px solid var(--success);
+}
+
+/* Card Copy Phone Button */
+.card-copy-phone {
+    background: var(--bg-card-alt);
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    transition: var(--ease);
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.card-copy-phone:hover {
+    background: var(--border);
+}
+
+/* Search Button */
+.btn-search {
+    background: var(--navy);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: var(--ease);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-search:hover:not(:disabled) {
+    background: var(--navy-mid);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Saved Routes Section
+   ========================================================================== */
+.saved-routes-section {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.saved-routes-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.saved-routes-section .section-header h3 {
+    color: var(--navy);
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.saved-routes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.saved-route-card {
+    background: var(--bg-page);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.saved-route-card:hover {
+    border-color: var(--navy);
+    box-shadow: var(--shadow-sm);
+}
+
+.saved-route-card .route-name {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+}
+
+.saved-route-card .route-points {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.saved-route-card .route-points .arrow {
+    color: var(--text-muted);
+}
+
+.saved-route-card .route-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.saved-route-card .route-actions button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    border-radius: var(--radius-sm);
+}
+
+.saved-route-card .btn-delete {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+.saved-route-card .btn-delete:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .filter-item {
+        min-width: 100%;
+    }
+
+    .filter-item-full {
+        min-width: 100%;
+    }
+
+    .filter-card-body {
+        padding: var(--space-md);
+    }
+
+    .trips-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .trip-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .trip-card-footer .btn-book,
+    .trip-card-footer .btn {
+        width: 100%;
+    }
+
+    .driver-contact-panel {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .driver-contact-panel .call-btn,
+    .driver-contact-panel .btn-copy-phone {
+        width: 100%;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    /* Touch-friendly buttons */
+    .btn, .btn-book, .btn-submit {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Prevent horizontal scroll */
+    body { overflow-x: hidden; }
+    
+    /* Better spacing */
+    .trip-card { padding: 1rem; }
+    .stat-card { padding: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-card-body {
+        padding: var(--space-sm);
+    }
+    
+    .trip-card-footer .btn-book {
+        font-size: 0.85rem;
+    }
+    
+    /* Form inputs prevent iOS zoom */
+    .filter-item input,
+    .filter-item select {
+        font-size: 16px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .trip-card-footer .btn-book {
+        font-size: 0.8rem;
+        padding: 0.6rem;
+    }
+}
+
+/* ==========================================================================
+   Dark Mode Overrides — dashboard.css
+   ========================================================================== */
+body.dark-mode .dashboard-header h2,
+body.dark-mode .section-header h2 {
+    color: var(--text-primary);
+}
+
+body.dark-mode .section,
+body.dark-mode .dashboard-section,
+body.dark-mode .search-trips-section,
+body.dark-mode .post-trip-section,
+body.dark-mode .my-trips-section,
+body.dark-mode .my-bookings-section {
+    background: var(--bg-page);
+}
+
+body.dark-mode .filter-bar,
+body.dark-mode .filter-row {
+    background: var(--bg-card);
+    border-color: var(--border);
+}
+
+body.dark-mode .trip-form-map,
+body.dark-mode .map-section,
+body.dark-mode #map,
+body.dark-mode #dashboard-map {
+    border-color: var(--border);
+}
+
+body.dark-mode .nearby-section,
+body.dark-mode .saved-routes-section {
+    background: var(--bg-card);
+    border-color: var(--border);
+}
+
+body.dark-mode .booking-modal .modal-content,
+body.dark-mode .auth-modal .modal-content {
+    background: var(--bg-card);
+    border-color: var(--border);
+}
+
+body.dark-mode .booking-modal .modal-header,
+body.dark-mode .auth-modal .modal-header {
+    background: var(--bg-card-alt);
+    border-bottom-color: var(--border);
+}
+
+body.dark-mode .booking-contact-panel,
+body.dark-mode .driver-contact-panel {
+    background: var(--bg-card-alt);
+    border-color: var(--border);
+}
+
+body.dark-mode .form-section,
+body.dark-mode .post-trip-form {
+    background: var(--bg-card);
+}
+
+body.dark-mode .proximity-search {
+    background: var(--bg-card);
+    border-color: var(--border);
+}
+
+body.dark-mode .saved-route-card {
+    background: var(--bg-card-alt);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+body.dark-mode .checkbox-label {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .intermediate-cities-container {
+    background: var(--bg-card-alt);
+    border-color: var(--border);
+}
