@@ -1,5 +1,9 @@
+# Sensitive runtime files — never commit these
 .env
 vendor/
+
+# Log files (all patterns — cron, email, PHP errors, etc.)
 php_errors.log
 cron_log.txt
 email_errors.log
+*.log

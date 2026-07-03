@@ -5,21 +5,15 @@ header('X-Frame-Options: SAMEORIGIN');
 header('X-XSS-Protection: 1; mode=block');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 
-session_set_cookie_params([
-    'lifetime' => 0,
-    'path' => '/',
-    'secure' => (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-                 || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https'),
-    'httponly' => true,
-    'samesite' => 'Lax'
-]);
-session_save_path(sys_get_temp_dir());
-session_start();
+// Load SecurityManager for enterprise-grade session management
+require_once __DIR__ . '/src/Security/SecurityManager.php';
+use Sharek\Security\SecurityManager;
 
-// Generate CSRF token if not exists
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+// Initialize secure session with timeout, X-Forwarded-Proto-aware secure
+// cookie flag, and CSRF protection (consistent with login.php, register.php,
+// dashboard.php) — replaces the inline session_set_cookie_params() that only
+// checked $_SERVER['HTTPS'] and missed idle/absolute session-timeout enforcement.
+SecurityManager::initSecureSession();
 ?>
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">

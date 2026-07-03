@@ -120,17 +120,28 @@ try {
     
     $deleteStmt->execute();
     $deletedTripsCount = $deleteStmt->rowCount();
-    
+
+    /* ==========================================================================
+       Cleanup: Stale Login Attempt Records
+       (Noted in migrations/004_add_login_rate_limiting.sql as worth doing via cron)
+       ========================================================================== */
+    $deleteAttemptsStmt = $pdo->prepare(
+        'DELETE FROM login_attempts WHERE attempted_at < (NOW() - INTERVAL 1 DAY)'
+    );
+    $deleteAttemptsStmt->execute();
+    $deletedAttemptsCount = $deleteAttemptsStmt->rowCount();
+
     /* ==========================================================================
        Activity Logging
        ========================================================================== */
     // تۆمارکردنی چالاکی لە فایلی cron_log.txt
     // بنووسێت: کەی کاری کردووە + چەند گەشت سڕدراوەتەوە
-    $logMessage = date('Y-m-d H:i:s') . " - Cleanup: Deleted {$deletedTripsCount} old completed trips (older than 1 year)\n";
+    $logMessage = date('Y-m-d H:i:s') . " - Cleanup: Deleted {$deletedTripsCount} old completed trips (older than 1 year), {$deletedAttemptsCount} stale login_attempt rows (older than 1 day)\n";
     @file_put_contents(__DIR__ . '/cron_log.txt', $logMessage, FILE_APPEND | LOCK_EX);
-    
+
     // پەیامی سەرکەوتوویی بۆ CLI
-    echo "Cleanup completed. Deleted {$deletedTripsCount} old completed trips (older than 1 year).\n";
+    echo "Cleanup completed. Deleted {$deletedTripsCount} old completed trips (older than 1 year), {$deletedAttemptsCount} stale login_attempt rows (older than 1 day).\n";
+
     
 } catch (PDOException $e) {
     /* ==========================================================================

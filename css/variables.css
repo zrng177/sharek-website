@@ -41,6 +41,7 @@
     --text-muted:     #6b7280;
     --text-subtle:    #94a3b8;
     --text-white:     #ffffff;
+    --text-h:         #0a1433; /* Alias for heading text — same as --text-primary */
 
     /* Border & UI */
     --border:         #dde4f5;
@@ -121,6 +122,7 @@ body.dark-mode {
     --text-muted:     #64748b;
     --text-subtle:    #94a3b8;
     --text-white:     #ffffff;
+    --text-h:         #f0f6ff; /* Alias for heading text — same as --text-primary */
 
     /* Border & UI */
     --border:         #1e2d4a;

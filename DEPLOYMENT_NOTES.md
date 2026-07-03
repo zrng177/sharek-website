@@ -1,124 +1,134 @@
-# Deployment Security Notes
+# Deployment Notes — Sharek v1.6
 
 ## ⚠️ CRITICAL: Credential Rotation Required
 
-After deploying to production, you MUST rotate all exposed credentials immediately.
+After deploying to production, you **MUST** rotate all exposed credentials immediately.
 
 ### Exposed Credentials (Must Rotate)
 
-The following credentials have been exposed in version control and must be changed:
-
 1. **ADMIN_PASSWORD_HASH**
-   - Run: `php generate_admin_hash.php`
-   - Replace the hash in .env with the generated one
-   - Use a strong, unique password (minimum 12 characters, mixed case, numbers, symbols)
-   - Store the new password securely (password manager, not in code)
+   - Generate a new bcrypt hash:
+     ```php
+     echo password_hash('YourNewStrongPassword', PASSWORD_DEFAULT);
+     ```
+   - Replace the hash value in `.env`
+   - Use a minimum 12-character password with mixed case, numbers, and symbols
 
 2. **DB_PASS** (Database Password)
    - Change via your hosting provider's control panel (InfinityFree, cPanel, etc.)
-   - Update the .env file with the new password
-   - Database user: typically the same as your hosting account username
+   - Update `.env` with the new password
    - Generate a strong random password (20+ characters)
 
 3. **SMTP_PASS** (Email Password)
-   - Change via your email service provider (Gmail, Outlook, etc.)
-   - If using app-specific passwords, generate a new one
-   - Update the .env file with the new password
-   - Enable 2FA on your email account if not already enabled
+   - Change or regenerate app-specific password via your email provider
+   - Update `.env` with the new password
 
 4. **CRON_SECRET** (Cron Job Security Secret)
-   - Generate a new random string (32+ characters, mixed case, numbers, symbols)
-   - Update the .env file with the new secret
-   - This secret protects cron jobs from unauthorized execution
+   - Generate a new random string (32+ characters)
+   - Update `.env` and your cron-job.org job settings with the new secret
 
-## Rotation Process
+5. **MAPTILER_API_KEY** (Map Tile Key)
+   - Found in `js/app.js` line ~13 (intentionally client-visible but restrict via domain allowlist)
+   - Log in at https://cloud.maptiler.com/account/keys
+   - Add "Allowed HTTP Origins" restriction to your production domain
+   - Free tier: 100,000 map loads/month
 
-### Step 1: Generate New Admin Hash
-```bash
-php generate_admin_hash.php
-```
-
-### Step 2: Update Hosting Provider Credentials
-1. Log into your hosting control panel (InfinityFree, cPanel, etc.)
-2. Change database password
-3. Update email password or generate new app-specific password
-4. Generate new cron secret
-
-### Step 3: Update .env File
-Replace all credential values in .env with the new ones:
-```
-ADMIN_PASSWORD_HASH=your_new_generated_hash_here
-DB_PASS=your_new_db_password_here
-SMTP_PASS=your_new_smtp_password_here
-CRON_SECRET=your_new_random_secret_here
-```
-
-### Step 4: Delete Helper Script
-```bash
-rm generate_admin_hash.php
-```
-
-### Step 5: Test Application
-- Test admin login with new password
-- Test email functionality
-- Test database operations
-- Test cron jobs if applicable
-
-## Security Best Practices
-
-### Password Requirements
-- Minimum 12 characters
-- Mix of uppercase, lowercase, numbers, and symbols
-- No dictionary words or common patterns
-- Unique for each service (don't reuse passwords)
-
-### Storage Requirements
-- Store credentials in password manager (1Password, Bitwarden, etc.)
-- Never commit credentials to version control
-- Never share credentials via email or chat
-- Rotate credentials regularly (every 90 days recommended)
-
-### .env File Security
-- .env should be in .gitignore (already configured)
-- Never upload .env to public repositories
-- Set proper file permissions (600: read/write for owner only)
-- Backup .env securely (encrypted storage)
+---
 
 ## Production Deployment Checklist
 
-- [ ] Rotate ADMIN_PASSWORD_HASH
-- [ ] Rotate DB_PASS via hosting panel
-- [ ] Rotate SMTP_PASS via email provider
-- [ ] Rotate CRON_SECRET
-- [ ] Delete install_db.php from production
-- [ ] Delete sharek_db.sql from production
-- [ ] Delete generate_admin_hash.php
-- [ ] Verify .env is not accessible via web
+### Security
+- [ ] Rotate `ADMIN_PASSWORD_HASH` in `.env`
+- [ ] Rotate `DB_PASS` via hosting panel
+- [ ] Rotate `SMTP_PASS` via email provider
+- [ ] Rotate `CRON_SECRET`
+- [ ] Restrict `MAPTILER_API_KEY` to your domain at maptiler.com
+- [ ] Verify `.env` is not web-accessible: `curl -i https://yourdomain.com/.env` must return 403
+- [ ] Verify `database_setup/` is not web-accessible: `curl -i https://yourdomain.com/database_setup/sharek_db.sql` must return 403
+- [ ] Verify `Database.php` is not directly downloadable: must return 403
+
+### Database
+- [ ] Run `database_setup/sharek_db.sql` on fresh install (creates all tables)
+- [ ] For existing databases: run all 4 migrations in `migrations/` in order
+- [ ] Verify `login_attempts` table exists (required for login rate limiting)
+
+### Application
 - [ ] Test admin login with new password
-- [ ] Test email functionality
-- [ ] Test database operations
-- [ ] Verify HTTPS is working (cookies should be secure)
-- [ ] Check .htaccess protections are active
+- [ ] Test user registration + OTP email delivery
+- [ ] Test password reset flow
+- [ ] Test trip creation and booking
+- [ ] Verify HTTPS is working (cookies should be Secure)
+- [ ] Check `.htaccess` protections are active (test with curl)
+- [ ] Set up cron job at cron-job.org (daily at 02:00, with `X-Cron-Secret` header)
+
+### Performance
+- [ ] Verify Gzip compression is active (`curl -H "Accept-Encoding: gzip" -I https://yourdomain.com/`)
+- [ ] Verify CSS/JS caching headers are set (1-year `Cache-Control`)
+
+---
+
+## Cron Job Setup (cron-job.org)
+
+InfinityFree does **not** support server cron jobs. Use the free https://cron-job.org service:
+
+1. Create account at cron-job.org
+2. Create new cronjob:
+   - **URL**: `https://yourdomain.com/cron_cleanup`
+   - **Schedule**: Daily at 02:00
+   - **Request method**: GET
+   - **Custom header**: `X-Cron-Secret: YOUR_CRON_SECRET`
+3. Replace `YOUR_CRON_SECRET` with the value of `CRON_SECRET` in your `.env`
+
+The cron script cleans up:
+- Completed trips older than 1 year (frees DB space)
+- Login attempt records older than 1 day (keeps rate-limit table lean)
+
+---
+
+## .env File Template
+
+```ini
+DB_HOST=your_db_host
+DB_NAME=sharek_db
+DB_USER=your_db_user
+DB_PASS=your_strong_db_password
+
+SMTP_HOST=smtp.yourprovider.com
+SMTP_USER=your@email.com
+SMTP_PASS=your_smtp_app_password
+SMTP_PORT=587
+
+ADMIN_PASSWORD_HASH=your_bcrypt_hash_here
+CRON_SECRET=your_32_char_random_secret
+EMAIL_TOKEN_TTL_HOURS=24
+APP_URL=https://yourdomain.com
+ADMIN_EMAIL=admin@yourdomain.com
+FCM_SERVICE_ACCOUNT_JSON=
+MAPTILER_API_KEY=your_maptiler_key_here
+```
+
+---
 
 ## Emergency Procedures
 
 ### If Credentials Are Compromised
-1. Immediately rotate all credentials
-2. Review access logs for suspicious activity
-3. Check for unauthorized database changes
-4. Review user accounts for any new/modified accounts
-5. Enable additional monitoring/alerting
+1. Immediately rotate all credentials in `.env`
+2. Review server access logs for suspicious activity
+3. Check database for unauthorized changes
+4. Review user accounts for new/modified admin accounts
 
 ### If Admin Access Is Lost
 1. Access database directly via phpMyAdmin or hosting panel
-2. Manually update admin password hash in users table
-3. Use password_hash() with new password
-4. Test login with new credentials
+2. Run: `UPDATE users SET password = '<new_hash>' WHERE email = 'your_admin_email'`
+3. Generate the hash with: `echo password_hash('NewPassword', PASSWORD_DEFAULT);`
 
-## Contact & Support
+---
 
-If you discover a security vulnerability:
-- Immediately rotate all credentials
-- Review audit logs
-- Contact security team if applicable
-- Document the incident for future reference
+## File Permissions (Linux/Unix Hosting)
+
+```bash
+chmod 600 .env          # Owner read/write only
+chmod 644 *.php         # Owner write, world read
+chmod 755 css/ js/      # Directories need execute bit
+chmod 644 css/* js/*    # Static assets
+```

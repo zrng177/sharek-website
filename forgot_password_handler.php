@@ -5,19 +5,18 @@ header('X-Frame-Options: SAMEORIGIN');
 header('X-XSS-Protection: 1; mode=block');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 
-session_save_path(sys_get_temp_dir());
-session_start();
-header('Content-Type: application/json');
+require_once __DIR__ . '/src/Security/SecurityManager.php';
+use Sharek\Security\SecurityManager;
 
-// Generate CSRF token if not exists
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+// Initialize secure session (consistent with all other PHP endpoints)
+SecurityManager::initSecureSession();
+
+header('Content-Type: application/json');
 
 // CSRF validation for all POST requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrfToken = $_POST['csrf_token'] ?? '';
-    if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $csrfToken)) {
+    if (!SecurityManager::validateCsrfToken($csrfToken)) {
         echo json_encode(['success' => false, 'message' => 'پشتڕاستکردنی فۆرم شکست هێنا. دووبارە هەوڵ بدەرەوە.']);
         exit;
     }

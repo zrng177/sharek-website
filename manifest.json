@@ -2,7 +2,7 @@
   "name": "شەریک - هاوبەشکردنی گەشت",
   "short_name": "شەریک",
   "description": "یەکەمین پلاتفۆرمی هاوبەشکردنی گەشت لە کوردستان",
-  "start_url": "./index.html",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#1e3a8a",
@@ -30,13 +30,13 @@
       "name": "گەشتەکان",
       "short_name": "گەشت",
       "description": "گەشتی گونجاو بدۆزەرەوە",
-      "url": "./dashboard.php#live-map-section"
+      "url": "./dashboard#live-map-section"
     },
     {
       "name": "تۆمارکردن",
       "short_name": "تۆمارکردن",
       "description": "هەژمارێکی نوێ دروست بکە",
-      "url": "./register.php"
+      "url": "./register"
     }
   ]
 }
