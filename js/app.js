@@ -5,7 +5,10 @@ const API_URL = 'api.php';
 const fetchOpts = { credentials: 'same-origin' };
 
 // ── MapTiler API Key ──────────────────────────────────────────────────────────
-// Replace the value below with your key from https://cloud.maptiler.com/account/keys
+// SECURITY NOTE: This key is visible to all visitors in page source.
+// To prevent abuse, log in to https://cloud.maptiler.com/account/keys and add
+// an "Allowed HTTP Origins" domain restriction (e.g. yourdomain.com) so the
+// key only works from your site, not from a stranger's machine.
 // Free tier: 100,000 map loads/month — more than enough for a growing app.
 const MAPTILER_API_KEY = 'vRW5Z4GyqXenVG3MzVkM';
 // ─────────────────────────────────────────────────────────────────────────────

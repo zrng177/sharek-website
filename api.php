@@ -802,10 +802,19 @@ class SharekAPI {
         // at the point of HTML output (see audit finding #2), not here at
         // write-time. strip_tags() still guards against stray markup.
         $name = strip_tags(trim($data['name'] ?? ''));
-        $phone = strip_tags(trim($data['phone'] ?? ''));
         $email = filter_var(trim($data['email'] ?? ''), FILTER_SANITIZE_EMAIL);
         $pass = $data['password'] ?? '';
         $confirmPass = $data['confirm_password'] ?? '';
+
+        // Normalise + validate phone using the shared SecurityManager helper
+        // (same logic used in login.php / register.php) so there is a single
+        // source of truth for what constitutes a valid Kurdish phone number.
+        require_once __DIR__ . '/src/Security/SecurityManager.php';
+        $phone = \Sharek\Security\SecurityManager::normalizeKurdishPhone(
+            strip_tags(trim($data['phone'] ?? ''))
+        );
+        if (!preg_match('/^07\d{9}$/', $phone))
+            return $this->sendError(400, 'ژمارەی مۆبایل دەبێت بە فۆرماتی 07XXXXXXXXX بێت');
 
         // پشتڕاستکردنی داتا
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
