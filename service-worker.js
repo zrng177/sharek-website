@@ -9,11 +9,11 @@ const API_CACHE  = 'sharek-api-v1';
 // Static shell files to cache immediately (admin.php intentionally excluded)
 const SHELL_FILES = [
     './',
-    './index.html',
-    './how-it-works.html',
-    './about.html',
-    './offers.html',
-    './contact.php',
+    './index',
+    './how-it-works',
+    './about',
+    './offers',
+    './contact',
     './manifest.json',
     './icons/icon-192.png',
     './icons/icon-512.png',
@@ -84,14 +84,14 @@ self.addEventListener('fetch', e => {
         return;
     }
 
-    // PHP pages: network-first (always fresh content)
-    if (url.pathname.endsWith('.php')) {
-        e.respondWith(networkFirst(e.request, CACHE_NAME));
+    // Static assets (has an extension like .css, .js, .png): cache-first
+    if (url.pathname.match(/\.[a-z0-9]+$/i)) {
+        e.respondWith(cacheFirst(e.request));
         return;
     }
 
-    // Static assets: cache-first
-    e.respondWith(cacheFirst(e.request));
+    // Pages (extensionless URLs like /login, /dashboard): network-first
+    e.respondWith(networkFirst(e.request, CACHE_NAME));
 });
 
 async function cacheFirst(request) {
