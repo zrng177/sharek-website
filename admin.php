@@ -393,7 +393,7 @@ if ($isAdmin) {
                 <input type="password" id="admin_password" name="admin_password" required>
             </div>
             <button type="submit" name="admin_login" class="btn btn-primary">چوونەژوورەوە</button>
-            <p class="admin-hint"><a href="index.html">گەڕانەوە بۆ ماڵپەڕ</a></p>
+            <p class="admin-hint"><a href="index">گەڕانەوە بۆ ماڵپەڕ</a></p>
         </form>
     </main>
 <?php else: ?>
@@ -402,7 +402,7 @@ if ($isAdmin) {
             <h1>📊 داشبۆردی بەڕێوەبردنی شەریک</h1>
             <div class="admin-header-actions">
                 <button onclick="showSmtpTest()" class="btn btn-secondary">📧 تاقیکردنەوەی SMTP</button>
-                <a href="index.html" class="btn btn-secondary">ماڵپەڕی سەرەکی</a>
+                <a href="index" class="btn btn-secondary">ماڵپەڕی سەرەکی</a>
                 <form method="post" style="display:inline;">
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['admin_csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
                     <button type="submit" name="admin_logout" class="btn btn-danger">🚪 دەرچوون</button>

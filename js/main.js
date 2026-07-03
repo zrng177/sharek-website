@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Page Transitions for Auth Links
 function initPageTransitions() {
-    document.querySelectorAll('a[href="register.php"], a[href="login.php"]').forEach(link => {
+    document.querySelectorAll('a[href="register"], a[href="login"]').forEach(link => {
         link.addEventListener('click', () => {
             document.body.classList.add('page-exit');
         });

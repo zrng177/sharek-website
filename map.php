@@ -184,7 +184,7 @@
         <h1>🗺️ نەخشەی گەشتەکان</h1>
         <div style="display: flex; gap: 0.5rem; align-items: center;">
             <button id="theme-toggle" class="theme-toggle" aria-label="تەبەدڵکردنی مۆد" aria-pressed="false" style="background: none; border: 1.5px solid rgba(255,255,255,0.3); border-radius: 8px; padding: .42rem .55rem; cursor: pointer; font-size: 1rem; line-height: 1; color: white;">🌙</button>
-            <a href="index.html" class="back-link">← گەڕانەوە</a>
+            <a href="index" class="back-link">← گەڕانەوە</a>
         </div>
     </div>
     
@@ -263,7 +263,7 @@
                                         <div class="price">
                                             💰 ${trip.price_formatted}
                                         </div>
-                                        <a href="index.html" class="book-btn">بەکارهێنانی گەشت</a>
+                                        <a href="index" class="book-btn">بەکارهێنانی گەشت</a>
                                     </div>
                                 `;
                                 

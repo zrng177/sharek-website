@@ -31,7 +31,7 @@ http_response_code(500);
             <h1 class="error-code">500</h1>
             <h2 class="error-title">هەڵەی سێرڤەر</h2>
             <p class="error-message">ببورە، هەڵەیەک ڕوویدا. تکایە دواتر هەوڵبەرەوە.</p>
-            <a href="index.html" class="btn btn-primary">گەڕانەوە بۆ سەرەوە</a>
+            <a href="index" class="btn btn-primary">گەڕانەوە بۆ سەرەوە</a>
         </div>
     </div>
     <style>

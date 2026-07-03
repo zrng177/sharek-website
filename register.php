@@ -189,8 +189,8 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
 <body>
     <header class="auth-header">
         <div class="container">
-            <a href="index.html" class="logo-link">🚗 <span>شەریک</span></a>
-            <a href="index.html" class="back-link">← گەڕانەوە بۆ مالپەڕ</a>
+            <a href="index" class="logo-link">🚗 <span>شەریک</span></a>
+            <a href="index" class="back-link">← گەڕانەوە بۆ مالپەڕ</a>
         </div>
     </header>
 
@@ -246,7 +246,7 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
                     <span id="btn1-spin" style="display:none">⏳ چاوەڕێ بکە...</span>
                 </button>
                 <div class="login-link">
-                    هەژمارت هەیە؟ <a href="login.php">چوونەژوورەوە</a>
+                    هەژمارت هەیە؟ <a href="login">چوونەژوورەوە</a>
                 </div>
             </div>
 
@@ -281,7 +281,7 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
                     <div class="check">✅</div>
                     <h2>تۆمارکردن سەرکەوتوو بوو!</h2>
                     <p>بەخێربێیت بۆ شەریک! ئێستا دەتوانی گەشت بدۆزیتەوە.</p>
-                    <a href="dashboard.php" class="btn-submit" style="display:inline-block;text-decoration:none;text-align:center">
+                    <a href="dashboard" class="btn-submit" style="display:inline-block;text-decoration:none;text-align:center">
                         چوونەژوورەوەی داشبۆرد 🚗
                     </a>
                 </div>
