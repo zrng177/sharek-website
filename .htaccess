@@ -9,8 +9,8 @@ ErrorDocument 500 /500.php
     
     # 1. Force remove .php and .html extensions (External Redirect 301)
     # If a user types /login.php, redirect them to /login
-    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.(php|html)
-    RewriteRule ^/?(.*)\.(php|html)$ /$1 [L,R=301]
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.(php|html)[\s?]
+    RewriteRule ^ /%1 [R=301,L,NE]
 
     # 2. Internally map extensionless URLs back to actual files
     # Only if the request is not an existing file or directory
