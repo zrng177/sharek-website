@@ -1,0 +1,128 @@
+# Sharek v1.5 - Apache Configuration
+# Error Page Redirects
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+# ── Routing / Clean URLs ──────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # 1. Force remove .php and .html extensions (External Redirect 301)
+    # If a user types /login.php, redirect them to /login
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.(php|html)[\s?]
+    RewriteRule ^ /%1 [R=301,L,NE]
+
+    # 2. Internally map extensionless URLs back to actual files
+    # Only if the request is not an existing file or directory
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    
+    # Check if a .php file exists with this name
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+    
+    # Check if an .html file exists with this name
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.*)$ $1.html [L]
+</IfModule>
+
+# PHP Error Reporting
+# NOTE: the actual error-reporting policy (audit finding #15) is now set
+# once, in Database.php (required by virtually every entry point), which
+# is the single source of truth: report E_ALL internally for logging, but
+# never display errors to visitors. Nothing is set here anymore so the two
+# can't drift out of sync the way they previously did (this file said
+# "error_reporting 0", Database.php said E_ALL, and Database.php's later
+# runtime call always won).
+
+# ── Security Headers ──────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ── Block sensitive files from public access (by exact name) ───────────
+# Covers the app's actual sensitive PHP files. install_db.php is also
+# listed here as a second, independent layer on top of its own CSRF/?confirm=
+# gate. Log/SQL/env files (email_errors.log, cron_log.txt, sharek_db.sql,
+# .env) are covered below by extension, so they don't need to be repeated
+# here by exact name.
+#
+# SECURITY FIX: previously used only the Apache 2.2 "Order Allow,Deny /
+# Deny from all" syntax. On a pure Apache 2.4 host without mod_access_compat
+# enabled, that syntax is silently ignored (not an error — it just does
+# nothing), which would leave .env, Database.php, EmailService.php etc.
+# directly downloadable. Each block below now tries the Apache 2.4 native
+# "Require all denied" first (mod_authz_core), falling back to the legacy
+# directive only if that module isn't present, so it works either way.
+# Still verify directly after deploying: curl -i https://yourdomain/.env
+# should return 403, not the file contents.
+<FilesMatch "^(install_db\.php|Database\.php|EmailService\.php|test_email\.php|test\.php|debug\.php)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# ── Block all .php files in vendor directory ──────────────────────────
+<FilesMatch "vendor/.*\.php$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# ── Disable directory listing ─────────────────────────────────────────
+Options -Indexes
+
+# ── Block sensitive files by extension (manifest.json is intentionally
+#    excluded since it's a real, public PWA file) ───────────────────────
+<FilesMatch "\.(log|sql|env|md)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# ── Block sensitive JSON/lock files by exact name ───────────────────────
+<FilesMatch "^(composer\.json|composer\.lock|package\.json|package-lock\.json)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Allow cron_cleanup only from localhost
+# Removed - CRON_SECRET in .env provides sufficient protection
+
+
+# Enable Gzip Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Set Cache Control
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>

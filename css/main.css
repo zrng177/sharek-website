@@ -1,0 +1,495 @@
+/*
+    Sharek v1.5 - Main Stylesheet
+    
+    @file main.css
+    @date 2026-05-25
+    @description Main layout styles: reset, body, html, .container, header, footer, nav
+    @version 1.5.0
+*/
+
+/* Import CSS Variables and Kurdish Typography */
+
+/* Variables are now in variables.css */
+
+/* ==========================================================================
+   Reset Rules
+   ========================================================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    direction: rtl;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+img, svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+/* ==========================================================================
+   Typography & RTL Alignment — Vazirmatn
+   ========================================================================== */
+body {
+    font-family: 'Vazirmatn', 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-secondary);
+    line-height: 1.9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+    text-align: right;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* ==========================================================================
+   Layout Structure
+   ========================================================================== */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    width: 100%;
+}
+
+.main {
+    flex: 1;
+    padding: var(--space-xl) 0;
+}
+
+/* Dashboard tab sections — only hide/show within the app dashboard */
+.dashboard-page .section {
+    display: none;
+    animation: fadeSlideIn 0.35s ease forwards;
+}
+
+.dashboard-page .section.active {
+    display: block;
+}
+
+/* Fallback for pages that rely on direct .section class toggling */
+.section.tab-section {
+    display: none;
+    animation: fadeSlideIn 0.35s ease forwards;
+}
+
+.section.tab-section.active {
+    display: block;
+}
+
+@keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.header {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.82);
+    border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    color: var(--text-primary);
+    padding: 0.875rem 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+body.dark-mode .header {
+    background: rgba(9, 13, 22, 0.75);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+body.dark-mode .logo {
+    color: var(--text-white);
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.nav-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: var(--ease);
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-btn:hover {
+    background: var(--bg-card-alt);
+    color: var(--navy);
+}
+
+.nav-btn.active {
+    background: var(--navy);
+    color: white;
+}
+
+body.dark-mode .nav-btn {
+    color: var(--text-secondary);
+}
+
+body.dark-mode .nav-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--text-white);
+}
+
+body.dark-mode .nav-btn.active {
+    background: var(--navy);
+    color: white;
+}
+
+.logo::before {
+    content: '🚗';
+    font-size: 1.3rem;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+.nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.header-nav {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.header-nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: var(--ease);
+}
+
+.header-nav a:hover {
+    background: var(--bg-card-alt);
+    color: var(--navy);
+}
+
+.header-nav a.active {
+    background: var(--navy);
+    color: white;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .header-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-card);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-nav.active {
+        display: flex;
+    }
+
+    .header-nav a {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem;
+    }
+
+    .header-actions {
+        display: none;
+    }
+}
+
+.nav-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1.5px solid var(--border);
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: var(--ease);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.nav-btn:hover {
+    background: var(--bg-card-alt);
+    border-color: var(--border-focus);
+    transform: translateY(-1px);
+}
+
+.nav-btn:active {
+    transform: scale(0.96);
+}
+
+.nav-btn.active {
+    background: white;
+    color: var(--navy);
+    border-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+body.dark-mode .nav-btn.active {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+}
+
+/* ==========================================================================
+   Header Auth Controls
+   ========================================================================== */
+.header-auth {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.user-welcome {
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.45rem 0.85rem;
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
+
+body.dark-mode .user-welcome {
+    color: var(--text-white);
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.15);
+}
+
+.nav-btn-auth, .nav-btn-logout {
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   Theme Toggle
+   ========================================================================== */
+.theme-toggle {
+    background: var(--bg-card-alt);
+    border: 1.5px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.45rem 0.6rem;
+    border-radius: var(--radius-md);
+    transition: var(--ease);
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--border);
+    transform: scale(1.08);
+}
+
+.theme-toggle:active {
+    transform: scale(0.96);
+}
+
+body.dark-mode .theme-toggle {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+    color: #fbbf24;
+}
+
+body.dark-mode .theme-toggle:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* ==========================================================================
+   Section Headers
+   ========================================================================== */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.section-header h2 {
+    font-size: 1.75rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   Media Queries — Mobile First
+   ========================================================================== */
+@media (max-width: 768px) {
+    .container { padding: 0 0.85rem; }
+
+    .main { padding: var(--space-md) 0; }
+
+    /* Header stacks on small screens */
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6rem;
+    }
+
+    .logo { justify-content: center; }
+
+    .nav {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .nav-btn {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem 0.6rem;
+        font-size: 0.82rem;
+    }
+
+    .header-auth {
+        justify-content: center;
+    }
+
+    html { font-size: 15px; }
+}
+
+@media (max-width: 420px) {
+    .nav-btn { font-size: 0.78rem; padding: 0.45rem 0.4rem; }
+    
+    /* Touch-friendly buttons */
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Better spacing */
+    .container { padding: 0 0.5rem; }
+    
+    /* Prevent horizontal scroll */
+    body { overflow-x: hidden; }
+    * { max-width: 100%; }
+    
+    /* Better text readability */
+    html { font-size: 14px; }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+    .nav-btn { font-size: 0.7rem; padding: 0.4rem 0.35rem; }
+    .container { padding: 0 0.4rem; }
+}
+
+/* ══════════════════════════════════════════════
+   InfinityFree injected ad — prevent layout break
+   ══════════════════════════════════════════════ */
+#ifr_banner_ad,
+#if_notice,
+[id^="infinityfree"],
+[class^="infinityfree"] {
+    position: fixed !important;
+    bottom: 0 !important;
+    top: auto !important;
+    z-index: 9000 !important;
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+}
+
+/* Padding so bottom content is not hidden behind the banner */
+body {
+    padding-bottom: env(safe-area-inset-bottom, 60px) !important;
+}
+
+/* Ensure our sticky header stays below any injected overlay */
+.auth-header,
+header,
+nav {
+    z-index: 500 !important;
+}

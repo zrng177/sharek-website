@@ -1,0 +1,652 @@
+/*
+    Sharek — Comprehensive Responsive Fixes
+    Fixes all layout, overflow, touch, RTL, iOS, and mobile issues
+    Load LAST after all other CSS files
+*/
+
+/* ==========================================================================
+   GLOBAL — Prevent overflow, fix RTL, iOS, touch
+   ========================================================================== */
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* All images responsive */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Fix RTL: use logical properties everywhere */
+* {
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   iOS ZOOM PREVENTION — any input must be >= 16px on mobile
+   ========================================================================== */
+@media (max-width: 768px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* ==========================================================================
+   TOUCH TARGETS — min 44px height/width for all interactive elements
+   ========================================================================== */
+@media (max-width: 900px) {
+    .btn,
+    .btn-primary,
+    .btn-secondary,
+    .btn-cta,
+    .btn-auth,
+    .btn-submit,
+    .btn-book,
+    .nav-btn,
+    .tab-btn,
+    .auth-tab,
+    button,
+    [role="button"],
+    .social-link,
+    .footer-social a {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+}
+
+/* ==========================================================================
+   HEADER — Fix z-index stacking and mobile overflow
+   ========================================================================== */
+.header {
+    z-index: 1000;
+}
+
+/* Fix: header-content shouldn't wrap on mobile in a broken way */
+@media (max-width: 900px) {
+    .header-content {
+        flex-wrap: nowrap;
+        gap: 0.75rem;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+        flex-shrink: 0;
+        max-width: 120px;
+    }
+
+    /* Push menu and theme toggles to end */
+    .theme-toggle,
+    .menu-toggle {
+        flex-shrink: 0;
+    }
+
+    /* Hide the logo emoji on very small screens to save space */
+    .logo::before {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   MOBILE NAV DRAWER — Fix RTL animation and auth placement
+   ========================================================================== */
+@media (max-width: 900px) {
+    /* Nav drawer is a right-side panel in RTL */
+    .nav.open {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: auto;
+        width: min(300px, 85vw);
+        height: 100vh;
+        background: var(--bg-card);
+        border-left: 1px solid var(--border);
+        border-right: none;
+        padding: 5rem 1.25rem 2rem;
+        z-index: 800;
+        box-shadow: -4px 0 24px rgba(0,0,0,0.2);
+        overflow-y: auto;
+        transform: translateX(0);
+        animation: slideInFromRight 0.25s ease;
+    }
+
+    @keyframes slideInFromRight {
+        from { transform: translateX(100%); }
+        to   { transform: translateX(0); }
+    }
+
+    /* Auth buttons inside the nav drawer */
+    .header-auth.open {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        right: 0;
+        left: auto;
+        width: min(300px, 85vw);
+        height: auto;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border);
+        padding: 1rem 1.25rem;
+        z-index: 801;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        pointer-events: all;
+    }
+
+    .header-auth.open .btn-auth {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   HERO — Must be above fold on 375px
+   ========================================================================== */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 100svh;
+        min-height: 100vh;
+        padding-top: 4.5rem;
+        padding-bottom: 2rem;
+        align-items: flex-start;
+    }
+
+    .hero-content {
+        padding: 1.5rem 0 2rem;
+        max-width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(1.7rem, 6vw, 2.4rem);
+        letter-spacing: -0.02em;
+    }
+
+    .hero-content p {
+        font-size: 0.97rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 0.875rem 1.25rem;
+    }
+
+    .hero-trust {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .trust-item {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-badge {
+        font-size: 0.75rem;
+    }
+}
+
+/* ==========================================================================
+   TRUST BAR — Fix negative margin overlap on mobile
+   ========================================================================== */
+.trust-bar {
+    /* Reset problematic negative margin on mobile */
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .trust-bar {
+        padding: 1.75rem 1.25rem;
+        border-radius: 16px;
+    }
+
+    .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .trust-number {
+        font-size: 2rem;
+    }
+
+    .trust-icon {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .trust-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .trust-card {
+        padding: 1rem 0.75rem;
+    }
+
+    .trust-number {
+        font-size: 1.7rem;
+    }
+}
+
+/* ==========================================================================
+   SECTIONS — Better spacing on mobile
+   ========================================================================== */
+@media (max-width: 768px) {
+    .section {
+        padding: 3rem 0;
+    }
+
+    .section-title {
+        margin-bottom: 2rem;
+    }
+
+    .section-title h2 {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+    }
+}
+
+/* ==========================================================================
+   HOW IT WORKS TABS — Fix tab overflow
+   ========================================================================== */
+@media (max-width: 768px) {
+    .tabs {
+        width: 100%;
+        gap: 0.25rem;
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 0.6rem 0.5rem;
+        font-size: 0.87rem;
+        white-space: nowrap;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .step::after {
+        display: none !important;
+    }
+
+    .step {
+        padding: 1.25rem;
+    }
+}
+
+/* ==========================================================================
+   FEATURES GRID — Better columns on all sizes
+   ========================================================================== */
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .feature-card {
+        padding: 1.25rem 1rem;
+    }
+
+    .feature-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.7rem;
+    }
+
+    .feature-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .feature-card p {
+        font-size: 0.82rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   ABOUT GRID
+   ========================================================================== */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .about-card {
+        padding: 1.5rem 1.25rem;
+    }
+}
+
+/* ==========================================================================
+   CONTACT GRID — Stack on mobile
+   ========================================================================== */
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-info,
+    .contact-form {
+        padding: 1.75rem 1.25rem;
+    }
+}
+
+/* ==========================================================================
+   LIVE MAP — Responsive height
+   ========================================================================== */
+@media (max-width: 768px) {
+    #live-map {
+        height: 280px;
+    }
+}
+
+@media (max-width: 420px) {
+    #live-map {
+        height: 220px;
+    }
+}
+
+/* ==========================================================================
+   TESTIMONIALS
+   ========================================================================== */
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* ==========================================================================
+   OFFERS GRID
+   ========================================================================== */
+@media (max-width: 768px) {
+    .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .offer-card {
+        padding: 1.25rem 1rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .offers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   FINAL CTA
+   ========================================================================== */
+@media (max-width: 768px) {
+    .final-cta {
+        padding: 4rem 0;
+    }
+
+    .final-cta h2 {
+        font-size: clamp(1.3rem, 5vw, 2rem);
+    }
+
+    .btn-cta {
+        width: 100%;
+        justify-content: center;
+        max-width: 360px;
+    }
+}
+
+/* ==========================================================================
+   FOOTER — Responsive grid
+   ========================================================================== */
+@media (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .footer {
+        padding: 2.5rem 0 1.5rem;
+    }
+
+    .footer-section h3 {
+        font-size: 1rem;
+    }
+}
+
+/* ==========================================================================
+   STATS GRID
+   ========================================================================== */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   AUTH PAGES (login.php, register.php)
+   ========================================================================== */
+@media (max-width: 600px) {
+    .auth-card,
+    .register-card,
+    .login-card {
+        margin: 1rem;
+        padding: 1.5rem 1.25rem;
+        border-radius: 16px;
+    }
+
+    .auth-tabs {
+        margin-bottom: 1rem;
+    }
+}
+
+/* ==========================================================================
+   DASHBOARD — Sticky header on mobile
+   ========================================================================== */
+@media (max-width: 768px) {
+    .header {
+        position: sticky;
+        top: 0;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   FORM ELEMENTS — Consistent styling and accessibility
+   ========================================================================== */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--navy-mid) !important;
+    box-shadow: 0 0 0 3px var(--blue-glow) !important;
+}
+
+/* Visible focus for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+    outline: 2px solid var(--navy-mid);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   LONG KURDISH WORDS — Prevent overflow
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6,
+p, li, a, label, span,
+.testimonial-text,
+.feature-card p,
+.about-card p,
+.step p,
+.offer-card p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+/* ==========================================================================
+   CONTAINER — Ensure padding on all screen sizes
+   ========================================================================== */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+}
+
+/* ==========================================================================
+   DARK MODE — Fix missing dark mode on trust-bar
+   ========================================================================== */
+body.dark-mode .trust-bar {
+    background: var(--bg-card-alt);
+    border-color: var(--border);
+}
+
+/* ==========================================================================
+   SCROLL PADDING — Offset for sticky header (anchor links)
+   ========================================================================== */
+html {
+    scroll-padding-top: 70px;
+}
+
+/* ==========================================================================
+   SAFE AREA — iPhone notch / Dynamic Island support
+   ========================================================================== */
+@supports (padding: max(0px)) {
+    .header {
+        padding-top: max(0.9rem, env(safe-area-inset-top));
+    }
+
+    .footer {
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    }
+
+    .nav.open {
+        padding-top: max(5rem, calc(5rem + env(safe-area-inset-top)));
+    }
+}
+
+/* ==========================================================================
+   LANDSCAPE MOBILE — Prevent hero being too tall
+   ========================================================================== */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding-top: 5rem;
+        padding-bottom: 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+}
+
+/* ==========================================================================
+   PRINT — Basic print styles
+   ========================================================================== */
+@media print {
+    .header,
+    .footer,
+    .menu-toggle,
+    .theme-toggle,
+    .btn-cta,
+    .final-cta {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+}
+
+/* ==========================================================================
+   REDUCED MOTION — Respect user preferences
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .trust-dot {
+        animation: none !important;
+    }
+}

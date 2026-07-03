@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="چۆن کار دەکات - فێربە چۆن گەشت دەکەیت لەگەڵ شەریک">
+    <title>چۆن کار دەکات؟ | شەریک 🚗</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/shared-design.css">
+</head>
+<body>
+<script>
+    (function() { if (localStorage.getItem('sharek-theme') === 'dark') document.body.classList.add('dark-mode'); })();
+</script>
+
+<!-- ============ SIDEBAR OVERLAY ============ -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sharek-sidebar" id="mainSidebar" role="navigation" aria-label="Navigation Sidebar">
+    <div class="sidebar-header">
+        <a href="index.html" class="sidebar-brand">شەریک<span>.</span></a>
+        <button class="sidebar-close" onclick="closeSidebar()" aria-label="داخستنی سایدبار">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="sidebar-section-label">مەنیو</div>
+        <a href="index.html" class="sidebar-nav-link" onclick="closeSidebar()">
+            <i class="bi bi-house-fill"></i> سەرەتا
+        </a>
+        <a href="how-it-works.html" class="sidebar-nav-link active" onclick="closeSidebar()">
+            <i class="bi bi-question-circle-fill"></i> چۆن کار دەکات
+        </a>
+        <a href="about.html" class="sidebar-nav-link" onclick="closeSidebar()">
+            <i class="bi bi-info-circle-fill"></i> دەربارەمان
+        </a>
+        <a href="index.html#features" class="sidebar-nav-link" onclick="closeSidebar()">
+            <i class="bi bi-stars"></i> تایبەتمەندییەکان
+        </a>
+        <a href="offers.html" class="sidebar-nav-link" onclick="closeSidebar()">
+            <i class="bi bi-gift-fill"></i> پێشنیارەکان
+        </a>
+        <a href="contact.php" class="sidebar-nav-link" onclick="closeSidebar()">
+            <i class="bi bi-envelope-fill"></i> پەیوەندی
+        </a>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-section-label">گەشت</div>
+        <a href="dashboard.php" class="sidebar-nav-link" onclick="closeSidebar()">
+            <i class="bi bi-search"></i> دۆزینەوەی گەشت
+        </a>
+    </nav>
+    <div class="sidebar-auth">
+        <a href="register.php" class="sidebar-btn-register">
+            <i class="bi bi-person-plus-fill me-2"></i> تۆمارکردن — خۆرایە ✓
+        </a>
+        <a href="login.php" class="sidebar-btn-login">
+            <i class="bi bi-box-arrow-in-right me-2"></i> چوونەژوورەوە
+        </a>
+    </div>
+</aside>
+
+<!-- ============ NAVBAR ============ -->
+<nav class="navbar navbar-expand-lg fixed-top sharek-navbar" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">شەریک<span>.</span></a>
+
+        <div class="d-flex align-items-center gap-2 d-lg-none">
+            <button class="btn-theme-toggle" id="theme-toggle-mobile" aria-label="تەبەدڵکردنی مۆد">
+                <i class="bi bi-moon-stars"></i>
+            </button>
+            <button class="btn-sidebar-open" onclick="openSidebar()" aria-label="کردنەوەی مەنیو" aria-expanded="false" aria-controls="mainSidebar">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarHIW">
+            <ul class="navbar-nav mx-auto gap-1">
+                <li class="nav-item"><a class="nav-link" href="index.html">سەرەتا</a></li>
+                <li class="nav-item"><a class="nav-link active" href="how-it-works.html">چۆن کار دەکات</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">دەربارەمان</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#features">تایبەتمەندییەکان</a></li>
+                <li class="nav-item"><a class="nav-link" href="offers.html">پێشنیارەکان</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.php">پەیوەندی</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn-theme-toggle" id="theme-toggle" aria-label="تەبەدڵکردنی مۆد">
+                    <i class="bi bi-moon-stars"></i>
+                </button>
+                <button class="btn-sidebar-open d-none d-lg-inline-flex" onclick="openSidebar()" aria-label="کردنەوەی سایدبار">
+                    <i class="bi bi-layout-sidebar-inset-reverse"></i>
+                </button>
+                <a href="register.php" class="btn-nav-outline">تۆمارکردن</a>
+                <a href="login.php" class="btn-nav-primary">چوونەژوورەوە</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero-page">
+    <div class="container">
+        <nav class="hero-breadcrumb" aria-label="breadcrumb">
+            <a href="index.html">سەرەتا</a>
+            <span>/</span>
+            <span>چۆن کار دەکات</span>
+        </nav>
+        <h1>چۆن کار دەکات؟ 🚗</h1>
+        <p class="hero-subtitle">تەنها چەند قەدەم دوور ئەیی لە یەکەم گەشتەکەت</p>
+    </div>
+</section>
+
+<!-- ============ DRIVER FLOW ============ -->
+<section class="section-padding">
+    <div class="container">
+        <div class="section-title reveal">
+            <div class="section-label">شۆفێر</div>
+            <h2>شۆفێر — چۆن دەست پێ دەکەیت؟</h2>
+            <p>پرۆسەی ئاسان و خێرا بۆ شۆفێرەکان</p>
+        </div>
+        <div class="d-flex flex-column gap-3">
+            <div class="step-item">
+                <div class="step-number">١</div>
+                <div class="step-content">
+                    <h3>تۆمارکردن و پشتڕاستکردنی ئیمەیڵ</h3>
+                    <p>هەژمارێکی خۆت دروست بکە و ئیمەیڵەکەت پشتڕاست بکە. کۆدی پشتڕاستکردن بۆ ئیمەیڵەکەت دەنێردرێت.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">٢</div>
+                <div class="step-content">
+                    <h3>پشتڕاستکردنی بەکارهێنەر لەلایەن ئیدارە</h3>
+                    <p>پرۆفایلەکەت پشتڕاست دەکرێت لەلایەن تیمی پشتگیری. ئەمە دەخاتە کار بۆ پاراستنی سەفەرەکان.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">٣</div>
+                <div class="step-content">
+                    <h3>بڵاوکردنەوەی زانیاری گەشتەکەت</h3>
+                    <p>شار، کات، نرخ، و ژمارەی کورسی دیاری بکە. هەموو زانیاری گرنگ داخڵ بکە بۆ سەرنشینەکان.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">٤</div>
+                <div class="step-content">
+                    <h3>وەرگرتنی داواکاری سەرنشینان</h3>
+                    <p>کاتێک سەرنشین داواکاری دەکات، پرۆفایلەکەی ببینە و پشتڕاستی بکە. پەیوەندی پێک بە بۆ وردەکاری.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">٥</div>
+                <div class="step-content">
+                    <h3>گەشتکردن و وەرگرتنی خاڵ و ئەستێرە</h3>
+                    <p>گەشتەکە ئەنجام بدە و خاڵ و ئەستێرە وەربگرە. ئەمە یارمەتیدەرە بۆ گەشتی داهاتوو.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PASSENGER FLOW ============ -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="section-title reveal">
+            <div class="section-label">سەرنشین</div>
+            <h2>سەرنشین — چۆن دەست پێ دەکەیت؟</h2>
+            <p>دۆزینەوەی گەشت و سەفەرکردن بە ئاسانی</p>
+        </div>
+        <div class="d-flex flex-column gap-3">
+            <div class="step-item">
+                <div class="step-number">١</div>
+                <div class="step-content">
+                    <h3>تۆمارکردن و پشتڕاستکردنی ئیمەیڵ</h3>
+                    <p>هەژمارێکی خۆت دروست بکە و ئیمەیڵەکەت پشتڕاست بکە. کۆدی پشتڕاستکردن بۆ ئیمەیڵەکەت دەنێردرێت.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">٢</div>
+                <div class="step-content">
+                    <h3>گەڕان بەدوای گەشتی گونجاو</h3>
+                    <p>شار، کات، و فلتەرەکان دیاری بکە بۆ دۆزینەوەی گەشتی گونجاو بۆ خۆت.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">٣</div>
+                <div class="step-content">
+                    <h3>بینینی پرۆفایل و ئەستێرەی شۆفێر</h3>
+                    <p>پرۆفایلی شۆفێرەکە ببینە و ئەستێرەکانی بپشکنە. دڵنیا بە لە پاراستن.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">٤</div>
+                <div class="step-content">
+                    <h3>داواکردنی کورسی و چاوەڕوانی پشتڕاستکردنەوە</h3>
+                    <p>کورسی داوا بکە و چاوەڕێ بکە بۆ پشتڕاستکردنەوە لەلایەن شۆفێرەکە.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">٥</div>
+                <div class="step-content">
+                    <h3>گەشتکردن و نرخاندنی شۆفێر</h3>
+                    <p>گەشتەکە ئەنجام بدە و شۆفێرەکە نرخ بدە. ئەمە یارمەتیدەرە بۆ سەفەرەکانی تر.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ DELIVERY FLOW ============ -->
+<section class="section-padding">
+    <div class="container">
+        <div class="section-title reveal">
+            <div class="section-label">گەیاندن</div>
+            <h2>خزمەتی گەیاندن</h2>
+            <p>چۆن شتەکانت دەنێریت؟</p>
+        </div>
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="sharek-card reveal text-center">
+                    <div class="sharek-card-icon mx-auto mb-3"><i class="bi bi-list-ul"></i></div>
+                    <h4>١. بینینی گەشتی گەیاندن</h4>
+                    <p>لە لیستی گەشتەکاندا، گەشتی «گەیاندن» ببینە کە شۆفێرەکان ئامادەن شتەکان بگوازنەوە.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sharek-card reveal text-center">
+                    <div class="sharek-card-icon mx-auto mb-3"><i class="bi bi-telephone"></i></div>
+                    <h4>٢. پەیوەندیکردن بە شۆفێر</h4>
+                    <p>پەیوەندی بە شۆفێرەکە بکە بۆ وردەکاری شتەکە. شوێن و کاتی دیاری بکە.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sharek-card reveal text-center">
+                    <div class="sharek-card-icon mx-auto mb-3"><i class="bi bi-check-circle"></i></div>
+                    <h4>٣. گەیاندن و پشتڕاستکردنەوە</h4>
+                    <p>شتەکە گەیاندرا و پشتڕاستی بکە. خاڵ و ئەستێرە بە شۆفێرەکە بدە.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="section-padding bg-light">
+    <div class="container">
+        <div class="section-title reveal">
+            <div class="section-label">پرسیار و وەڵام</div>
+            <h2>پرسیارە باوەکان</h2>
+            <p>وەڵامی پرسیارەکانت لێرەیە</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="faq-item reveal">
+                    <div class="faq-question">نرخەکان چەندە؟</div>
+                    <div class="faq-answer"><p>نرخەکان دیاری دەکرێن لەلایەن شۆفێرەکە بەپێی دووری و کات. تۆ دەتوانی نرخەکان ببینیت پێش داواکردنی کورسی.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">شۆفێرەکان چۆن پشتڕاست دەکرێن؟</div>
+                    <div class="faq-answer"><p>هەموو شۆفێرەکان پشتڕاست دەکرێن لەلایەن تیمی پشتگیری. پرۆفایل، نرخ، و پشتڕاستکردنی ئیمەیڵ پشکن دەکرێن.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">ئایا دەتوانم گەشتم هەڵبوەشێنمەوە؟</div>
+                    <div class="faq-answer"><p>بەڵێ، دەتوانی گەشتم هەڵبوەشێنیتەوە. بەڵام پێشنیار دەکەین کە زووتر بڵێی بۆ شۆفێرەکە بۆ ڕێزگرتن.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">گەشتی تایبەتی خانمان چییە؟</div>
+                    <div class="faq-answer"><p>گەشتی تایبەتی خانمان بریتییە لە گەشتێک کە تەنها لەلایەن شۆفێری خانمان ئەنجام دەدرێت بۆ پاراستنی زیاتر.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">کاتی گەشت گۆڕی — چۆن دەزانم؟</div>
+                    <div class="faq-answer"><p>کاتێک شۆفێرەکە کاتەکە گۆڕی، ئاگادار دەکرێیتەوە بە ئیمەیڵ و پەیام لە ناو ئەپەکەدا.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">ئایا مۆبایل پێویستە؟</div>
+                    <div class="faq-answer"><p>بەڵێ، مۆبایل پێویستە بۆ پەیوەندی لەگەڵ شۆفێر و سەرنشینەکان. بەڵام دەتوانی بەکارهێنیت لەسەر وێبسایتەکەش.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">چۆن خاڵ کۆدەکەم؟</div>
+                    <div class="faq-answer"><p>خاڵ کۆدەکە بەپێی گەشتەکانت دیاری دەکرێت. هەر گەشتێک خاڵی تایبەتی خۆی هەیە بەپێی دووری.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">پارە چۆن دەدرێتە شۆفێر؟</div>
+                    <div class="faq-answer"><p>پارە دەدرێتە شۆفێر بەڕێگای سیستەمی پارەی ناوەکی. شۆفێرەکە دەتوانی پارەکان وەربگرێت لە هەژمارەکەی.</p></div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">کێ پەیوەندی پشتگیری بکەم؟</div>
+                    <div class="faq-answer"><p>دەتوانی پەیوەندی پشتگیری بکەیت لە ڕێگەی ئیمەیڵ یان تەلەفۆن لە ڕیپچەیی پەیوەندی.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-section">
+    <div class="container">
+        <h2>ئامادەیت؟</h2>
+        <p>ئێستا دەست پێ بکە و یەکەم گەشتەکەت ئەنجام بدە</p>
+        <a href="register.php" class="btn-sharek-green">تۆمارکردن — خۆرایە ✓</a>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="sharek-footer">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <span class="footer-brand-name">شەریک<span>.</span></span>
+                <p>یەکەمین پلاتفۆرمی گەشت لە کوردستان. گەشتت ئاسانتر، ئابووریتر، و سەلامەتر.</p>
+                <div class="footer-social">
+                    <a href="#" class="disabled-link" aria-label="فەیسبووک"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="disabled-link" aria-label="ئینستاگرام"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="disabled-link" aria-label="تێلەگرام"><i class="bi bi-telegram"></i></a>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <h5>بەستەرەکان</h5>
+                <ul>
+                    <li><a href="index.html">سەرەتا</a></li>
+                    <li><a href="how-it-works.html">چۆن کار دەکات</a></li>
+                    <li><a href="about.html">دەربارەمان</a></li>
+                    <li><a href="index.html#features">تایبەتمەندییەکان</a></li>
+                    <li><a href="contact.php">پەیوەندی</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2">
+                <h5>یاسایی</h5>
+                <ul>
+                    <li><a href="#" class="disabled-link">سیاسەتی تایبەتمەندی</a></li>
+                    <li><a href="#" class="disabled-link">مەرجەکانی بەکارهێنان</a></li>
+                    <li><a href="#" class="disabled-link">سیاسەتی کوکی</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>پەیوەندی</h5>
+                <ul>
+                    <li>📧 ***@***.***</li>
+                    <li>📱 +964 000 000 0000</li>
+                    <li>📍 دەربەندیخان، کوردستان</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© ٢٠٢٦ شەریک — هەموو مافەکان پارێزراون</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ---- DARK MODE INIT ----
+(function() {
+    const t = document.getElementById('theme-toggle');
+    const tm = document.getElementById('theme-toggle-mobile');
+    const isDark = document.body.classList.contains('dark-mode');
+    if (t) t.innerHTML = isDark ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+    if (tm) tm.innerHTML = isDark ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+})();
+
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('sharek-theme', isDark ? 'dark' : 'light');
+    const icon = isDark ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+    const t = document.getElementById('theme-toggle');
+    const tm = document.getElementById('theme-toggle-mobile');
+    if (t) t.innerHTML = icon;
+    if (tm) tm.innerHTML = icon;
+}
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+const tmb = document.getElementById('theme-toggle-mobile');
+if (tmb) tmb.addEventListener('click', toggleTheme);
+
+// ---- SIDEBAR ----
+function openSidebar() {
+    document.getElementById('mainSidebar').classList.add('open');
+    document.getElementById('sidebarOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+}
+function closeSidebar() {
+    document.getElementById('mainSidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSidebar(); });
+
+// ---- NAVBAR SCROLL ----
+window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// ---- STEPS ANIMATION ----
+const stepObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); stepObs.unobserve(e.target); } });
+}, { threshold: 0.2 });
+document.querySelectorAll('.step-item').forEach(el => stepObs.observe(el));
+
+// ---- SCROLL REVEAL ----
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ---- FAQ ----
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-question').addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+    });
+});
+</script>
+</body>
+</html>
