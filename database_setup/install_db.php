@@ -249,7 +249,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['install'])) {
             </form>
             
             <div style="text-align: center; margin-top: 1.5rem;">
-                <a href="index" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem;">گەڕانەوە بۆ ماڵپەڕ</a>
+                <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem;">گەڕانەوە بۆ ماڵپەڕ</a>
             </div>
         </div>
     </div>

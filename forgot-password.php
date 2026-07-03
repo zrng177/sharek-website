@@ -74,14 +74,14 @@ if (empty($_SESSION['csrf_token'])) {
             <div class="header-content">
                 <h1 class="logo">شەریک</h1>
                 <nav class="nav">
-                    <a href="index" class="nav-btn">سەرەتا</a>
-                    <a href="how-it-works" class="nav-btn">چۆن کار دەکات</a>
-                    <a href="about" class="nav-btn">دەربارەمان</a>
-                    <a href="contact" class="nav-btn">پەیوەندی</a>
+                    <a href="index.html" class="nav-btn">سەرەتا</a>
+                    <a href="how-it-works.html" class="nav-btn">چۆن کار دەکات</a>
+                    <a href="about.html" class="nav-btn">دەربارەمان</a>
+                    <a href="contact.php" class="nav-btn">پەیوەندی</a>
                 </nav>
                 <div class="header-auth">
-                    <a href="register" class="nav-btn nav-btn-auth">تۆمارکردن</a>
-                    <a href="login" class="nav-btn nav-btn-auth">چوونەژوورەوە</a>
+                    <a href="register.php" class="nav-btn nav-btn-auth">تۆمارکردن</a>
+                    <a href="login.php" class="nav-btn nav-btn-auth">چوونەژوورەوە</a>
                 </div>
                 <button id="theme-toggle" class="theme-toggle" aria-label="تەبەدڵکردنی مۆد">
                     🌙
@@ -159,7 +159,7 @@ if (empty($_SESSION['csrf_token'])) {
                     </div>
                     
                     <div class="auth-footer">
-                        <p>گەڕانەوە بۆ چوونەژوورەوە؟ <a href="login">کلیک بکە</a></p>
+                        <p>گەڕانەوە بۆ چوونەژوورەوە؟ <a href="login.php">کلیک بکە</a></p>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@ http_response_code(404);
             <h1 class="error-code">404</h1>
             <h2 class="error-title">پەڕە نەدۆزرایەوە</h2>
             <p class="error-message">ببورە، پەڕەیەک کە دەگەڕێی بۆی بوونی نییە.</p>
-            <a href="index" class="btn btn-primary">گەڕانەوە بۆ سەرەوە</a>
+            <a href="index.html" class="btn btn-primary">گەڕانەوە بۆ سەرەوە</a>
         </div>
     </div>
     <style>

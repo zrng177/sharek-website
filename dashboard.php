@@ -117,7 +117,7 @@ $currentEmail    = htmlspecialchars($_SESSION['user_email'] ?? '', ENT_QUOTES, '
                     <button class="nav-btn active" data-tab="dashboard">داشبۆرد</button>
                     <button class="nav-btn" data-tab="post-trip">تۆمارکردنی گەشت</button>
                     <button class="nav-btn" data-tab="search-trips">گەڕان بەدوای گەشت</button>
-                    <a href="map" class="nav-btn">🗺️ نەخشە</a>
+                    <a href="map.php" class="nav-btn">🗺️ نەخشە</a>
                     <button class="nav-btn nav-btn-my-trips" data-tab="my-trips" style="display: none;">💼 گەشتەکانی من</button>
                     <button class="nav-btn nav-btn-my-bookings" data-tab="my-bookings" style="display: none;">🧳 گەشتە داواکراوەکانی من</button>
                 </nav>

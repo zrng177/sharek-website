@@ -57,42 +57,42 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
 <!-- ============ SIDEBAR ============ -->
 <aside class="sharek-sidebar" id="mainSidebar" role="navigation" aria-label="Navigation Sidebar">
     <div class="sidebar-header">
-        <a href="index" class="sidebar-brand">شەریک<span>.</span></a>
+        <a href="index.html" class="sidebar-brand">شەریک<span>.</span></a>
         <button class="sidebar-close" onclick="closeSidebar()" aria-label="داخستنی سایدبار">
             <i class="bi bi-x-lg"></i>
         </button>
     </div>
     <nav class="sidebar-nav">
         <div class="sidebar-section-label">مەنیو</div>
-        <a href="index" class="sidebar-nav-link" onclick="closeSidebar()">
+        <a href="index.html" class="sidebar-nav-link" onclick="closeSidebar()">
             <i class="bi bi-house-fill"></i> سەرەتا
         </a>
-        <a href="how-it-works" class="sidebar-nav-link" onclick="closeSidebar()">
+        <a href="how-it-works.html" class="sidebar-nav-link" onclick="closeSidebar()">
             <i class="bi bi-question-circle-fill"></i> چۆن کار دەکات
         </a>
-        <a href="about" class="sidebar-nav-link" onclick="closeSidebar()">
+        <a href="about.html" class="sidebar-nav-link" onclick="closeSidebar()">
             <i class="bi bi-info-circle-fill"></i> دەربارەمان
         </a>
         <a href="index.html#features" class="sidebar-nav-link" onclick="closeSidebar()">
             <i class="bi bi-stars"></i> تایبەتمەندییەکان
         </a>
-        <a href="offers" class="sidebar-nav-link" onclick="closeSidebar()">
+        <a href="offers.html" class="sidebar-nav-link" onclick="closeSidebar()">
             <i class="bi bi-gift-fill"></i> پێشنیارەکان
         </a>
-        <a href="contact" class="sidebar-nav-link active" onclick="closeSidebar()">
+        <a href="contact.php" class="sidebar-nav-link active" onclick="closeSidebar()">
             <i class="bi bi-envelope-fill"></i> پەیوەندی
         </a>
         <div class="sidebar-divider"></div>
         <div class="sidebar-section-label">گەشت</div>
-        <a href="dashboard" class="sidebar-nav-link" onclick="closeSidebar()">
+        <a href="dashboard.php" class="sidebar-nav-link" onclick="closeSidebar()">
             <i class="bi bi-search"></i> دۆزینەوەی گەشت
         </a>
     </nav>
     <div class="sidebar-auth">
-        <a href="register" class="sidebar-btn-register">
+        <a href="register.php" class="sidebar-btn-register">
             <i class="bi bi-person-plus-fill me-2"></i> تۆمارکردن — خۆرایە ✓
         </a>
-        <a href="login" class="sidebar-btn-login">
+        <a href="login.php" class="sidebar-btn-login">
             <i class="bi bi-box-arrow-in-right me-2"></i> چوونەژوورەوە
         </a>
     </div>
@@ -101,7 +101,7 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
 <!-- ============ NAVBAR ============ -->
 <nav class="navbar navbar-expand-lg fixed-top sharek-navbar" id="main-nav" role="navigation" aria-label="Main navigation">
     <div class="container">
-        <a class="navbar-brand" href="index">شەریک<span>.</span></a>
+        <a class="navbar-brand" href="index.html">شەریک<span>.</span></a>
 
         <div class="d-flex align-items-center gap-2 d-lg-none">
             <button class="btn-theme-toggle" id="theme-toggle-mobile" aria-label="تەبەدڵکردنی مۆد">
@@ -114,12 +114,12 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
 
         <div class="collapse navbar-collapse" id="navbarContact">
             <ul class="navbar-nav mx-auto gap-1">
-                <li class="nav-item"><a class="nav-link" href="index">سەرەتا</a></li>
-                <li class="nav-item"><a class="nav-link" href="how-it-works">چۆن کار دەکات</a></li>
-                <li class="nav-item"><a class="nav-link" href="about">دەربارەمان</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html">سەرەتا</a></li>
+                <li class="nav-item"><a class="nav-link" href="how-it-works.html">چۆن کار دەکات</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">دەربارەمان</a></li>
                 <li class="nav-item"><a class="nav-link" href="index.html#features">تایبەتمەندییەکان</a></li>
-                <li class="nav-item"><a class="nav-link" href="offers">پێشنیارەکان</a></li>
-                <li class="nav-item"><a class="nav-link active" href="contact">پەیوەندی</a></li>
+                <li class="nav-item"><a class="nav-link" href="offers.html">پێشنیارەکان</a></li>
+                <li class="nav-item"><a class="nav-link active" href="contact.php">پەیوەندی</a></li>
             </ul>
             <div class="d-flex align-items-center gap-2">
                 <button class="btn-theme-toggle" id="theme-toggle" aria-label="تەبەدڵکردنی مۆد">
@@ -128,8 +128,8 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
                 <button class="btn-sidebar-open d-none d-lg-inline-flex" onclick="openSidebar()" aria-label="کردنەوەی سایدبار">
                     <i class="bi bi-layout-sidebar-inset-reverse"></i>
                 </button>
-                <a href="register" class="btn-nav-outline">تۆمارکردن</a>
-                <a href="login" class="btn-nav-primary">چوونەژوورەوە</a>
+                <a href="register.php" class="btn-nav-outline">تۆمارکردن</a>
+                <a href="login.php" class="btn-nav-primary">چوونەژوورەوە</a>
             </div>
         </div>
     </div>
@@ -138,7 +138,7 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
 <!-- ============ HERO ============ -->
 <section class="hero-page">
     <div class="container">
-        <nav class="hero-breadcrumb"><a href="index">سەرەتا</a><span>/</span><span>پەیوەندی</span></nav>
+        <nav class="hero-breadcrumb"><a href="index.html">سەرەتا</a><span>/</span><span>پەیوەندی</span></nav>
         <h1>چۆن یارمەتیت بدەین؟ 💬</h1>
         <p class="hero-subtitle">پەیوەندی لەگەڵ ئێمە بکە — هەموو کات ئامادەین</p>
     </div>
@@ -197,7 +197,7 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
                     </button>
                 </div>
                 <div class="text-center mt-3">
-                    <p class="text-muted">پرسیارێکت هەیە؟ <a href="how-it-works" style="color:#1e3a8a;font-weight:600;">پرسیار و وەڵامەکان ببینە ←</a></p>
+                    <p class="text-muted">پرسیارێکت هەیە؟ <a href="how-it-works.html" style="color:#1e3a8a;font-weight:600;">پرسیار و وەڵامەکان ببینە ←</a></p>
                 </div>
             </div>
         </div>
@@ -220,11 +220,11 @@ $csrf = htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8');
             <div class="col-md-2">
                 <h5>بەستەرەکان</h5>
                 <ul>
-                    <li><a href="index">سەرەتا</a></li>
-                    <li><a href="how-it-works">چۆن کار دەکات</a></li>
-                    <li><a href="about">دەربارەمان</a></li>
+                    <li><a href="index.html">سەرەتا</a></li>
+                    <li><a href="how-it-works.html">چۆن کار دەکات</a></li>
+                    <li><a href="about.html">دەربارەمان</a></li>
                     <li><a href="index.html#features">تایبەتمەندییەکان</a></li>
-                    <li><a href="contact">پەیوەندی</a></li>
+                    <li><a href="contact.php">پەیوەندی</a></li>
                 </ul>
             </div>
             <div class="col-md-2">
