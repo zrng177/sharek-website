@@ -3,6 +3,31 @@
 ErrorDocument 404 /404.php
 ErrorDocument 500 /500.php
 
+# ── Routing / Clean URLs ──────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # 1. Force remove .php and .html extensions (External Redirect 301)
+    # If a user types /login.php, redirect them to /login
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.(php|html)
+    RewriteRule ^/?(.*)\.(php|html)$ /$1 [L,R=301]
+
+    # 2. Internally map extensionless URLs back to actual files
+    # Only if the request is not an existing file or directory
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    
+    # Check if a .php file exists with this name
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+    
+    # Check if an .html file exists with this name
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}.html -f
+    RewriteRule ^(.*)$ $1.html [L]
+</IfModule>
+
 # PHP Error Reporting
 # NOTE: the actual error-reporting policy (audit finding #15) is now set
 # once, in Database.php (required by virtually every entry point), which
