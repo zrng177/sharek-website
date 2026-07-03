@@ -634,14 +634,6 @@ class EmailService {
      * @return bool True if email sent successfully
      */
     public function sendRegistrationOTP($email, $userName, $code) {
-        $env = parse_ini_file(__DIR__ . '/.env', false, INI_SCANNER_RAW);
-        if (empty($env['SMTP_HOST'])) {
-            // Local Development Mode: If no SMTP server is configured, log the OTP locally and pretend it sent successfully.
-            $logLine = date('Y-m-d H:i:s') . " | LOCAL DEV OTP | To: {$email} | Code: {$code}" . PHP_EOL;
-            @file_put_contents(__DIR__ . '/local_otp.txt', $logLine, FILE_APPEND | LOCK_EX);
-            return true;
-        }
-
         $this->mailer->clearAddresses();
         $this->mailer->clearAttachments();
         
