@@ -493,8 +493,9 @@ class SharekAPI {
         // Verify CSRF token for POST requests
         $input = json_decode(file_get_contents('php://input'), true) ?? [];
         if (!isset($input['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $input['csrf_token'])) {
-            echo json_encode(['success' => false, 'message' => 'هەڵەیەک ڕووی دا - تکایە دووبارە هەوڵبدەرەوە']);
-            return;
+            http_response_code(403);
+            echo json_encode(['success' => false, 'message' => 'هەڵەیەک ڕووی دا - تکایە دووبارە هەوڵبدەرەوە', 'error_code' => 403]);
+            exit;
         }
 
         switch ($action) {

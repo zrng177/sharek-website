@@ -328,8 +328,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Auth Header -->
     <header class="auth-header">
         <div class="container">
-            <a href="index" class="logo-link">🚗 <span>شەریک</span></a>
-            <a href="index" class="back-link">← گەڕانەوە بۆ مالپەڕ</a>
+            <a href="index.html" class="logo-link">🚗 <span>شەریک</span></a>
+            <a href="index.html" class="back-link">← گەڕانەوە بۆ مالپەڕ</a>
         </div>
     </header>
 
@@ -341,7 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             
             <?php if ($error): ?>
-                <div class="error-message"><?php echo $error; ?></div>
+                <div class="error-message"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></div>
             <?php endif; ?>
             
             <form method="post">
@@ -363,15 +363,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
             
             <div class="forgot-password">
-                <a href="forgot-password">بیرچوونی تێپەڕەوشە؟</a>
+                <a href="forgot-password.php">بیرچوونی تێپەڕەوشە؟</a>
             </div>
             
             <div class="register-link">
-                هەژمارت نییە؟ <a href="register">تۆمارکردن</a>
+                هەژمارت نییە؟ <a href="register.php">تۆمارکردن</a>
             </div>
             
             <div style="text-align: center; margin-top: 1rem;">
-                <a href="index" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem;">گەڕانەوە بۆ ماڵپەڕ</a>
+                <a href="index.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem;">گەڕانەوە بۆ ماڵپەڕ</a>
             </div>
         </div>
     </div>
