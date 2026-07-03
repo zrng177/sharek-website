@@ -24,8 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/EmailService.php';
-require_once __DIR__ . '/src/Security/SecurityManager.php';
-use Sharek\Security\SecurityManager;
 
 $db = new Database();
 $pdo = $db->getConnection();

@@ -18,13 +18,13 @@ ErrorDocument 500 /500.php
     RewriteCond %{REQUEST_FILENAME} !-f
     
     # Check if a .php file exists with this name
-    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}.php -f
+    RewriteCond %{REQUEST_FILENAME}.php -f
     RewriteRule ^(.*)$ $1.php [L]
     
     # Check if an .html file exists with this name
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}.html -f
+    RewriteCond %{REQUEST_FILENAME}.html -f
     RewriteRule ^(.*)$ $1.html [L]
 </IfModule>
 
